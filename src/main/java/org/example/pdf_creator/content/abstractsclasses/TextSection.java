@@ -19,6 +19,7 @@ import com.itextpdf.layout.element.Paragraph;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.pdf_creator.factories.TextSectionListType;
 
 @Data
 @AllArgsConstructor
@@ -120,10 +121,13 @@ public abstract class TextSection implements Comparable<TextSection>{
             public BlockElement createContent() {
                 return null;
             }
-
             @Override
-            public void adjustForNullPointer() {
-
+            public void adjustForNullPointer() {}
+            @Override
+            public void modifyTextSectionListParameter(Object object) {}
+            @Override
+            public TextSectionListType getTextSectionListType() {
+                return null;
             }
         };
     }

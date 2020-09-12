@@ -19,4 +19,5 @@ module org.example {
     exports org.example.pdf_creator.content.sectionorganizers to com.fasterxml.jackson.databind;
     exports org.example.pdf_creator.content.enums to com.fasterxml.jackson.databind;
     exports org.example.pdf_creator.content.titlehandlers to com.fasterxml.jackson.databind;
+    exports org.example.pdf_creator.factories;
 }

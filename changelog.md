@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 12.09.2020
+* Added functionality of setting TextSectionListType via ChoiceBox
+
+
 ### 13.08.2020
 * Started moving FXML elements to their proper controllers
 * Created new enums: TitleHandlerType and TextSectionListType, serving a purpose of factory method for ITitleHandler and TextSectionList, respectively

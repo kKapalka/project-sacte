@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import org.example.controllers.ConfigElementController;
+import org.example.controllers.ConfigListController;
 import org.example.controllers.PDFConfigurationLoaderController;
 import org.example.pdf_creator.FontPresetPickerDialogBox;
 import org.example.pdf_creator.PdfCreationEngine;
@@ -38,7 +40,7 @@ public class App extends Application {
     public static Stage stage;
     private PdfCreationEngine engine;
     private FontStyleSingleton fontCreator;
-    public static List<TextSection> currentNestOfTextSections;
+    public static List<TextSection> currentNestOfTextSections = new ArrayList<>();
     private static PdfCreationConfiguration pdfCreationConfiguration;
     private MenuHandler menuHandler;
     static FXMLLoader loader;
@@ -74,7 +76,7 @@ public class App extends Application {
                 initForTextSection(currentNestOfTextSections.get(currentNestOfTextSections.size()-1));
                 break;
             case "config-list":
-                initForTextSectionList(currentNestOfTextSections.size() == 0 ? pdfCreationConfiguration.asTextSectionList() : currentNestOfTextSections.get(currentNestOfTextSections.size()-1).getTextSectionList());
+                initForTextSectionList(currentNestOfTextSections.size() == 0 ? pdfCreationConfiguration : currentNestOfTextSections.get(currentNestOfTextSections.size()-1).getTextSectionList());
                 break;
         }
     }
@@ -121,6 +123,6 @@ public class App extends Application {
         ((ConfigElementController) loader.getController()).init(section);
     }
     static void initForTextSectionList(TextSectionList textSectionList) {
-
+        ((ConfigListController) loader.getController()).init(textSectionList);
     }
 }

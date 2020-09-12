@@ -10,6 +10,7 @@ import lombok.ToString;
 import org.example.pdf_creator.content.FontPreset;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
+import org.example.pdf_creator.factories.TextSectionListType;
 
 import java.util.List;
 
@@ -57,5 +58,10 @@ public class ListedTextSections extends TextSectionList {
         } else {
             throw new UnsupportedOperationException("GridTextSections takes in ListNumberingType");
         }
+    }
+
+    @Override
+    public TextSectionListType getTextSectionListType() {
+        return TextSectionListType.LIST;
     }
 }

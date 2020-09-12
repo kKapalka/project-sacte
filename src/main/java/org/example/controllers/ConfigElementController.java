@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import org.example.App;
-import org.example.AppSingletonAccessPoint;
 import org.example.pdf_creator.FontPresetPickerDialogBox;
 import org.example.pdf_creator.content.FontPreset;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;

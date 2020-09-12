@@ -1,6 +1,7 @@
 package org.example.pdf_creator.factories;
 
 import com.itextpdf.layout.property.ListNumberingType;
+import org.example.pdf_creator.content.PdfCreationConfiguration;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
 import org.example.pdf_creator.content.sectionorganizers.GridTextSections;
 import org.example.pdf_creator.content.sectionorganizers.ListedTextSections;
@@ -16,6 +17,12 @@ public enum TextSectionListType {
         @Override
         public TextSectionList createList(TextSectionList baseList) {
             return new ListedTextSections(baseList.textSectionList, baseList.fontPresets, ListNumberingType.DECIMAL);
+        }
+    },
+    PDFCONFIG{
+        @Override
+        public TextSectionList createList(TextSectionList baseList) {
+            return new PdfCreationConfiguration(baseList.textSectionList);
         }
     };
 
