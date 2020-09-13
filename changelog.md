@@ -5,6 +5,7 @@
 
 ### 13.09.2020
 * Added labels and buttons to 'config-list.fxml'
+* succesfully saved and loaded PdfCreationConfiguration class, created from an empty object and set using UI controls
 
 ### 12.09.2020
 * Added functionality of setting TextSectionListType via ChoiceBox

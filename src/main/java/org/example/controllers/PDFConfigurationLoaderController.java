@@ -18,9 +18,9 @@ public class PDFConfigurationLoaderController {
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(App.stage);
-
+        System.out.println(App.pdfCreationConfiguration);
         if (file != null) {
-            System.out.println(JSONReadWriteUtils.writePDFConfigurationToFile(MyMocks.config,
+            System.out.println(JSONReadWriteUtils.writePDFConfigurationToFile(App.pdfCreationConfiguration,
                     file.getAbsolutePath()));
         } else {
             System.out.println(MessageCode.OPERATION_ABORTED);

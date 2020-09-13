@@ -15,8 +15,7 @@ import java.util.List;
 public class PdfCreationConfiguration extends TextSectionList {
 
     public PdfCreationConfiguration(List<TextSection> sections) {
-        this.fontPresets = new ArrayList<>();
-        this.textSectionList = sections;
+        super(sections);
         if(this.textSectionList.size() > 1) {
             Collections.sort(this.textSectionList);
         }

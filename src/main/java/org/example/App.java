@@ -41,7 +41,7 @@ public class App extends Application {
     private PdfCreationEngine engine;
     private FontStyleSingleton fontCreator;
     public static List<TextSection> currentNestOfTextSections = new ArrayList<>();
-    private static PdfCreationConfiguration pdfCreationConfiguration;
+    public static PdfCreationConfiguration pdfCreationConfiguration;
     private MenuHandler menuHandler;
     static FXMLLoader loader;
     public static BorderPane borderPane = new BorderPane();
@@ -111,6 +111,7 @@ public class App extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println(App.pdfCreationConfiguration);
             System.out.println(engine.displaySavePDFDialog(stage, App.pdfCreationConfiguration));
         }
     }

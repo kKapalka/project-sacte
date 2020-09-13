@@ -38,7 +38,7 @@
       <Text fx:id="sectionListText" layoutX="100.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wszystkie sekcje" textAlignment="CENTER" wrappingWidth="199.9999999999999" />
       <Text fx:id="sectionListText1" layoutX="400.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybrane sekcje" textAlignment="CENTER" wrappingWidth="199.9999999999999" />
       <Text fx:id="sectionListText11" layoutX="660.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presety czcionek" textAlignment="CENTER" wrappingWidth="199.9999999999999" />
-      <Button layoutX="100.0" layoutY="515.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Dodaj nową sekcję" />
-      <Button layoutX="660.0" layoutY="463.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Dodaj nowy preset" />
+      <Button fx:id="newSectionButton" layoutX="100.0" layoutY="515.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Dodaj nową sekcję" />
+      <Button fx:id="newPresetButton" layoutX="660.0" layoutY="463.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Dodaj nowy preset" />
    </children>
 </Pane>

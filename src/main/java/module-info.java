@@ -11,6 +11,7 @@ module org.example {
 
     opens org.example to javafx.fxml;
     opens org.example.controllers to javafx.fxml;
+    opens org.example.pdf_creator.content.abstractsclasses to com.fasterxml.jackson.databind;
 
     exports org.example;
     exports org.example.controllers to javafx.fxml;

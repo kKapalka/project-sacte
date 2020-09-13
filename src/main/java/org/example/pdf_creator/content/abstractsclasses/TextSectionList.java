@@ -1,5 +1,6 @@
 package org.example.pdf_creator.content.abstractsclasses;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.itextpdf.layout.element.BlockElement;
@@ -42,8 +43,6 @@ public abstract class TextSectionList {
     public abstract BlockElement createContent();
 
     public void setFontPresets(List<FontPreset> fontPresets) {
-        System.out.println(fontPresets);
-        System.out.println(textSectionList);
         this.textSectionList.forEach(el -> {
             el.setFontPresets(fontPresets);
         });
@@ -60,5 +59,6 @@ public abstract class TextSectionList {
 
     public abstract void modifyTextSectionListParameter(Object object);
 
+    @JsonIgnore
     public abstract TextSectionListType getTextSectionListType();
 }
