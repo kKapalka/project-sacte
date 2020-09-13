@@ -22,7 +22,7 @@ public enum TextSectionListType {
     PDFCONFIG{
         @Override
         public TextSectionList createList(TextSectionList baseList) {
-            return new PdfCreationConfiguration(baseList.textSectionList);
+            return new PdfCreationConfiguration(baseList.textSectionList, baseList.fontPresets);
         }
     };
 

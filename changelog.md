@@ -6,6 +6,7 @@
 ### 13.09.2020
 * Added labels and buttons to 'config-list.fxml'
 * succesfully saved and loaded PdfCreationConfiguration class, created from an empty object and set using UI controls
+* added 'isSelected' boolean parameter to TextSection, to inform the user whether this textSection has been selected for PDF exporting
 
 ### 12.09.2020
 * Added functionality of setting TextSectionListType via ChoiceBox

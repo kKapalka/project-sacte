@@ -15,6 +15,7 @@ import org.example.pdf_creator.factories.TextSectionListType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -61,4 +62,9 @@ public abstract class TextSectionList {
 
     @JsonIgnore
     public abstract TextSectionListType getTextSectionListType();
+
+    @JsonIgnore
+    public List<TextSection> getSelectedTextSections() {
+        return this.textSectionList.stream().filter(TextSection::isSelected).collect(Collectors.toList());
+    }
 }

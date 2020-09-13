@@ -35,7 +35,7 @@ public class GridTextSections extends TextSectionList {
     @Override
     public BlockElement createContent() {
         Table table = new Table(columnCount, false);
-        this.getTextSectionList().forEach(el -> table.addCell(new Cell().add(el.prepareDiv()).setBorder(Border.NO_BORDER)));
+        this.getSelectedTextSections().forEach(el -> table.addCell(new Cell().add(el.prepareDiv()).setBorder(Border.NO_BORDER)));
         return table;
     }
 

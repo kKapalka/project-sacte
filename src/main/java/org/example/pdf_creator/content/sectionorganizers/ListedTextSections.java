@@ -38,7 +38,7 @@ public class ListedTextSections extends TextSectionList {
             list = new com.itextpdf.layout.element.List(numberingType);
         }
         final com.itextpdf.layout.element.List finalList = list;
-        getTextSectionList().forEach(el -> {
+        getSelectedTextSections().forEach(el -> {
             ListItem listItem = new ListItem();
             listItem.add(el.prepareDiv());
             finalList.add(listItem);

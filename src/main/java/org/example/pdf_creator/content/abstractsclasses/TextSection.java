@@ -39,6 +39,7 @@ public abstract class TextSection implements Comparable<TextSection>{
     private ITitleHandler titleHandler;
     public List<FontPreset> fontPresets;
     private boolean usingParentFontPresets;
+    private boolean isSelected;
 
     public TextSection(String title, String subtitle, List<String> tags, int priority, ITitleHandler titleHandler, List<FontPreset> fontPresets) {
         this.uuid = UUID.randomUUID();
@@ -49,6 +50,7 @@ public abstract class TextSection implements Comparable<TextSection>{
         this.titleHandler = titleHandler;
         this.setUsingParentFontPresets(true);
         this.setFontPresets(fontPresets);
+        this.isSelected = false;
     }
 
     @Override
