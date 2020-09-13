@@ -2,6 +2,10 @@
 
 # Changelog
 
+
+### 13.09.2020
+* Added labels and buttons to 'config-list.fxml'
+
 ### 12.09.2020
 * Added functionality of setting TextSectionListType via ChoiceBox
 
