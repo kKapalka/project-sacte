@@ -6,6 +6,9 @@ import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
 import org.example.pdf_creator.content.sectionorganizers.GridTextSections;
 import org.example.pdf_creator.content.sectionorganizers.ListedTextSections;
 
+/**
+ * ListType enum used for converting between TextSectionList classes.
+ */
 public enum TextSectionListType {
     GRID{
         @Override

@@ -14,6 +14,11 @@ import org.example.pdf_creator.factories.TextSectionListType;
 
 import java.util.List;
 
+/**
+ * Class used to represent a TextSectionList
+ * in either an unordered or an ordered list.
+ * If supplied NumberingType is null, list will be unordered.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -12,6 +12,12 @@ import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
 import org.example.pdf_creator.content.enums.LineDrawerEnum;
 
+/**
+ * Title handler used for displaying title and subtitle like
+ * | TITLE --------- subtitle |
+ * Type of title-subtitle separation can be selected from:
+ * Solid Line, Dotted Line
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

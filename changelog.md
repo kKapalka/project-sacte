@@ -2,6 +2,8 @@
 
 # Changelog
 
+### 10.10.2020
+* Added comments for most of the Pdf representation classes
 
 ### 13.09.2020
 * Added labels and buttons to 'config-list.fxml'

@@ -21,6 +21,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.pdf_creator.factories.TextSectionListType;
 
+/**
+ * Representation of a single portion of content inside a PDF document.
+ * Can be nested indefinitely, with a use of proper classes.
+ * Unique entity is defined by its UUID.
+ * Uses first font preset in its list.
+ * Can represent its title and subtitle in different ways.
+ * Can be selected for PDF export and can inherit its parent's font presets
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,11 +61,22 @@ public abstract class TextSection implements Comparable<TextSection>{
         this.isSelected = false;
     }
 
+    /**
+     * Comparator used for positioning inside a PDF file
+     * @param o other TextSection
+     * @return priority level of this object - priority level of other object
+     */
     @Override
     public int compareTo(TextSection o) {
         return priority - o.priority;
     }
 
+    /**
+     * Method for constructing a div element inside a PDF document.
+     * First, it creates a title and subtitle bundle using its titleHandler.
+     * Then adds some space between and creates content if applicable.
+     * @return new div element
+     */
     public IBlockElement prepareDiv() {
         Div div = new Div();
         div = titleHandler.handleTitleAndSubtitle(div, createTitle(), createSubtitle());
@@ -69,6 +88,12 @@ public abstract class TextSection implements Comparable<TextSection>{
         return div;
     }
 
+    /**
+     * Method for creating title paragraph
+     * Uses font defined in FontStyleSingleton, and first fontPreset.
+     * Also applies leading to next paragraph under it using its multiplied leading.
+     * @return title paragraph
+     */
     public Paragraph createTitle() {
         FontStyleSingleton instance = FontStyleSingleton.getInstance();
         FontPreset fontPreset = getSectionFontPreset();
@@ -82,6 +107,11 @@ public abstract class TextSection implements Comparable<TextSection>{
         return para;
     }
 
+    /**
+     * Method for creating subtitle paragraph
+     * Uses font defined in FontStyleSingleton, and first fontPreset.
+     * @return subtitle paragraph
+     */
     public Paragraph createSubtitle() {
         Paragraph para = null;
         if(subtitle != null) {
@@ -117,20 +147,5 @@ public abstract class TextSection implements Comparable<TextSection>{
         return childrenFontPresets;
     }
 
-    public TextSectionList getTextSectionList() {
-        return new TextSectionList() {
-            @Override
-            public BlockElement createContent() {
-                return null;
-            }
-            @Override
-            public void adjustForNullPointer() {}
-            @Override
-            public void modifyTextSectionListParameter(Object object) {}
-            @Override
-            public TextSectionListType getTextSectionListType() {
-                return null;
-            }
-        };
-    }
+    public abstract TextSectionList getTextSectionList();
 }

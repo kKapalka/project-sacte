@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
 
+/**
+ * Type of TextSection which has its own TextSectionList
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

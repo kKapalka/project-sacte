@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
 
+/**
+ * Title handler used for displaying title and subtitle from top to down;
+ * Title right above subtitle
+ */
 @Data
 @NoArgsConstructor
 public class TopToDownTitleHandler implements ITitleHandler {

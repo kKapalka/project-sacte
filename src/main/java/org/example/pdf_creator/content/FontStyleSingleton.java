@@ -5,6 +5,9 @@ import com.itextpdf.kernel.font.PdfFont;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Singleton class containing a PdfFont used for generating a PDF file
+ */
 public class FontStyleSingleton {
 
     private static FontStyleSingleton instance;

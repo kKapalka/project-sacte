@@ -26,6 +26,6 @@ public class MyMocks {
                       new Content("To jest tytuł","To jest podtytuł testowy, dlatego sprawdzimy jak to wygląda tutaj", null, 2, new TwoColumnTitleHandler(0.4f))),
                  3
           ), true,presets
-          )));
+          )), presets);
 
 }

@@ -15,6 +15,10 @@ import org.example.pdf_creator.factories.TextSectionListType;
 
 import java.util.List;
 
+/**
+ * Class used for representing TextSectionList in a grid
+ * with a variable number of columns.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,6 +43,10 @@ public class GridTextSections extends TextSectionList {
         return table;
     }
 
+    /**
+     * Fail-safe mechanism - if required, this method adjusts the number of columns
+     * in order to be properly represented in a PDF file.
+     */
     @Override
     public void adjustForNullPointer() {
         this.columnCount = Math.max(1, this.columnCount - 1);

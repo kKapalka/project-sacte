@@ -11,6 +11,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
 
+/**
+ * TitleHandler used for representing title and subtitle
+ * in two separate columns.
+ * Percentage width of each individual column can be modified via columnsRatio parameter.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

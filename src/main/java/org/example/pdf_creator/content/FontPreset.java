@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import java.util.Arrays;
 import java.util.UUID;
 
+/**
+ * Representation of a single TextSection's font formatting - fontSize and fontColor
+ */
 @Data
 public class FontPreset {
 
@@ -63,14 +66,28 @@ public class FontPreset {
         }
     }
 
+    /**
+     * Method for displaying this FontPreset in a concise text representation to display in application
+     * @return
+     */
     public String toListViewString() {
         return "[(Title: "+ Arrays.toString(titleColorRgba) +", "+titleSize+"); Subtitle: "+ Arrays.toString(subtitleColorRgba) +", "+subtitleSize+")]";
     }
 
+    /**
+     * Method for comparing its text representation with another string
+     * @param otherString other string, ideally a string representation of another FontPreset
+     * @return true if both string values are the same
+     */
     public boolean equalsString(String otherString) {
         return this.toListViewString().equals(otherString);
     }
 
+    /**
+     * Method for cloning this FontPreset, in order to modify its values
+     * without meddling in the original object
+     * @return clone of FontPreset
+     */
     @Override
     public FontPreset clone() {
         FontPreset clone = new FontPreset();

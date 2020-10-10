@@ -8,6 +8,9 @@ import org.example.pdf_creator.content.titlehandlers.SideToSideTitleHandler;
 import org.example.pdf_creator.content.titlehandlers.TopToDownTitleHandler;
 import org.example.pdf_creator.content.titlehandlers.TwoColumnTitleHandler;
 
+/**
+ * Interface used for handling different display methods of TextSection title and subtitle
+ */
 @JsonTypeInfo( use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = TopToDownTitleHandler.class, name = "TopToDownTitleHandler"),

@@ -6,6 +6,9 @@ import org.example.pdf_creator.content.titlehandlers.SideToSideTitleHandler;
 import org.example.pdf_creator.content.titlehandlers.TopToDownTitleHandler;
 import org.example.pdf_creator.content.titlehandlers.TwoColumnTitleHandler;
 
+/**
+ * TitleHandler enum used for converting between different TitleHandler classes in a TextSection.
+ */
 public enum TitleHandlerType {
     SIDE_TO_SIDE{
         @Override
