@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -12,59 +13,88 @@ import org.example.pdf_creator.content.FontPreset;
 
 import java.util.regex.Pattern;
 
+/**
+ * Controller for dialog box for font preset - file: font-preset-setter.fxml
+ * Contains 2 sets of TextField and ColorPicker inputs, ine for title, other for subtitle
+ * TextField has input validation which blocks all non-number values.
+ * Has 'cancel' and 'confirm changes'
+ */
 public class FontPresetPickerDialogBoxController {
+
+    private static final Pattern validNumberText = Pattern.compile("(\\d*)");
 
     @FXML
     private TextField titleSizeField;
-
     @FXML
     private TextField subtitleSizeField;
-
     @FXML
     private ColorPicker titleColorInput;
-
     @FXML
     private ColorPicker subtitleColorInput;
-
     @FXML
     private Button confirmChanges;
 
     private FontPreset parent;
+    private ModalDialogOnCloseListener listener;
 
-    Pattern validNumberText = Pattern.compile("(\\d*)");
-
+    /**
+     * Initialize dialog box using Font Preset supplied,
+     * and perform supplied action upon closing using 'confirm changes' button
+     * @param preset Font Preset
+     * @param listener Listener, which listens on dialog box closing
+     */
     public void initValues(FontPreset preset, ModalDialogOnCloseListener listener) {
         this.parent = preset;
-        titleSizeField.setTextFormatter(produceNewNumberFormatter());
-        subtitleSizeField.setTextFormatter(produceNewNumberFormatter());
-        titleSizeField.setText(""+parent.getTitleSize());
-        subtitleSizeField.setText(""+parent.getSubtitleSize());
-        int[] titleColor = parent.getTitleColorRgba();
-        int[] subtitleColor = parent.getSubtitleColorRgba();
-        Color colorTitle = new Color((float)titleColor[0]/255f, (float)titleColor[1]/255f, (float)titleColor[2]/255f, 1.0f);
-        titleColorInput.getCustomColors().add(colorTitle);
-        titleColorInput.setValue(colorTitle);
-        Color colorSubtitle = new Color((float)subtitleColor[0]/255f, (float)subtitleColor[1]/255f, (float)subtitleColor[2]/255f, 1.0f);
-        subtitleColorInput.getCustomColors().add(colorSubtitle);
-        subtitleColorInput.setValue(colorSubtitle);
-
-        confirmChanges.setOnAction((ev) -> {
-            parent.setTitleSize(Integer.parseInt(titleSizeField.getText()));
-            parent.setSubtitleSize(Integer.parseInt(subtitleSizeField.getText()));
-            Color c = subtitleColorInput.getValue();
-            parent.setSubtitleColorRgba(new int[]{(int)(c.getRed()*255f), (int)(c.getGreen()*255f), (int)(c.getBlue()*255f)});
-            c = titleColorInput.getValue();
-            parent.setTitleColorRgba(new int[]{(int)(c.getRed()*255f), (int)(c.getGreen()*255f), (int)(c.getBlue()*255f)});
-            listener.execute(parent);
-        });
+        this.listener = listener;
+        setUpFontSizeInputField(titleSizeField, parent.getTitleSize());
+        setUpFontSizeInputField(subtitleSizeField, parent.getSubtitleSize());
+        setUpColorInput(titleColorInput, parent.getTitleColorRgba());
+        setUpColorInput(subtitleColorInput, parent.getSubtitleColorRgba());
+        confirmChanges.setOnAction(this::onConfirmChanges);
     }
 
-    private TextFormatter produceNewNumberFormatter() {
-        return new TextFormatter<>(new NumberStringConverter(), 0, change -> {
+    /**
+     * Method for setting up individual font size input field.
+     * Applies string formatter prohibiting from putting in other values than numbers
+     * and initializes it with supplied font size
+     * @param textField textField to set up
+     * @param fontSize initial value for this text field
+     */
+    private void setUpFontSizeInputField(TextField textField, int fontSize) {
+        textField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(), 0, change -> {
             String newText = change.getControlNewText();
             if (validNumberText.matcher(newText).matches()) {
                 return change ;
             } else return null ;
-        });
+        }));
+        textField.setText("" + fontSize);
+    }
+
+    /**
+     * Method for setting up individual color input
+     * using supplied color, in an int[3] representation
+     * @param colorInput input to set up
+     * @param color initial color for this input
+     */
+    private void setUpColorInput(ColorPicker colorInput, int[] color) {
+        Color colorTitle = new Color((float)color[0]/255f, (float)color[1]/255f, (float)color[2]/255f, 1.0f);
+        colorInput.getCustomColors().add(colorTitle);
+        colorInput.setValue(colorTitle);
+    }
+
+    /**
+     * Method which runs after confirming all the changes.
+     * Font Preset object is changed using values from input fields
+     * and resulting object is passed to the listener and its execute(object) method is called
+     * @param event button press event
+     */
+    private void onConfirmChanges(ActionEvent event) {
+        parent.setTitleSize(Integer.parseInt(titleSizeField.getText()));
+        parent.setSubtitleSize(Integer.parseInt(subtitleSizeField.getText()));
+        Color c = subtitleColorInput.getValue();
+        parent.setSubtitleColorRgba(new int[]{(int)(c.getRed()*255f), (int)(c.getGreen()*255f), (int)(c.getBlue()*255f)});
+        c = titleColorInput.getValue();
+        parent.setTitleColorRgba(new int[]{(int)(c.getRed()*255f), (int)(c.getGreen()*255f), (int)(c.getBlue()*255f)});
+        listener.execute(parent);
     }
 }
