@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.itextpdf.layout.element.BlockElement;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.FontPreset;
+import org.example.pdf_creator.content.FontPresetListContainer;
 import org.example.pdf_creator.content.PdfCreationConfiguration;
 import org.example.pdf_creator.content.sectionorganizers.GridTextSections;
 import org.example.pdf_creator.content.sectionorganizers.ListedTextSections;
@@ -30,11 +30,11 @@ import java.util.stream.Collectors;
         @JsonSubTypes.Type(value = PdfCreationConfiguration.class, name = "PdfCreationConfiguration")
 })
 
-public abstract class TextSectionList {
+public abstract class TextSectionList implements FontPresetListContainer {
 
     public UUID uuid;
     public List<TextSection> textSectionList;
-    public List<FontPreset> fontPresets;
+    public List<FontPreset> fontPresetList;
 
     /**
      * Main constructor. All constructors should use this one inside them, as this one sets UUID to randomUUID
@@ -45,7 +45,7 @@ public abstract class TextSectionList {
     public TextSectionList(List<TextSection> textSectionList, List<FontPreset> fontPresets) {
         this.uuid = UUID.randomUUID();
         this.textSectionList = textSectionList;
-        this.setFontPresets(fontPresets);
+        this.setFontPresetList(fontPresets);
     }
     public TextSectionList(List<TextSection> textSectionList) {
         this(textSectionList, new ArrayList<>());
@@ -63,13 +63,13 @@ public abstract class TextSectionList {
     /**
      * Custom setter for FontPresets, which sets fontPresets for every textSection in a list
      * which inherits parent fontPesets OR doesn't have its own FontPresets
-     * @param fontPresets fontPresets
+     * @param fontPresetList fontPresets
      */
-    public void setFontPresets(List<FontPreset> fontPresets) {
+    public void setFontPresetList(List<FontPreset> fontPresetList) {
         this.textSectionList.forEach(el -> {
-            el.setFontPresets(fontPresets);
+            el.setFontPresetList(fontPresetList);
         });
-        this.fontPresets = fontPresets;
+        this.fontPresetList = fontPresetList;
     }
 
     /**
@@ -79,8 +79,8 @@ public abstract class TextSectionList {
     public abstract void adjustForNullPointer();
 
     public void conditionallySetFontPresets(List<FontPreset> presets) {
-        if(this.fontPresets == null || this.fontPresets != presets) {
-            setFontPresets(presets);
+        if(this.fontPresetList == null || this.fontPresetList != presets) {
+            setFontPresetList(presets);
         }
     }
 

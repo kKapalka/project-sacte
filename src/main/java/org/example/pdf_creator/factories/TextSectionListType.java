@@ -13,19 +13,19 @@ public enum TextSectionListType {
     GRID{
         @Override
         public TextSectionList createList(TextSectionList baseList) {
-            return new GridTextSections(baseList.textSectionList, baseList.fontPresets, 3);
+            return new GridTextSections(baseList.textSectionList, baseList.fontPresetList, 3);
         }
     },
     LIST{
         @Override
         public TextSectionList createList(TextSectionList baseList) {
-            return new ListedTextSections(baseList.textSectionList, baseList.fontPresets, ListNumberingType.DECIMAL);
+            return new ListedTextSections(baseList.textSectionList, baseList.fontPresetList, ListNumberingType.DECIMAL);
         }
     },
     PDFCONFIG{
         @Override
         public TextSectionList createList(TextSectionList baseList) {
-            return new PdfCreationConfiguration(baseList.textSectionList, baseList.fontPresets);
+            return new PdfCreationConfiguration(baseList.textSectionList, baseList.fontPresetList);
         }
     };
 

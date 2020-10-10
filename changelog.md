@@ -4,6 +4,10 @@
 
 ### 10.10.2020
 * Added comments for most of the Pdf representation classes
+* added comments for both main .fxml file controllers
+* separated a method for setting up font preset list view into a class which those file controllers extend
+* refactored TextSection and TextSectionList
+* created a FontPresetListContainer interface to be used inside this new class
 
 ### 13.09.2020
 * Added labels and buttons to 'config-list.fxml'

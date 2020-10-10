@@ -12,33 +12,41 @@ import org.example.pdf_creator.content.abstractsclasses.TextSection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ConfigElementController {
+/**
+ * Controller for config-element.fxml
+ * Handles: applying listeners on Font Preset List View,
+ * listeners on Title Handler Selector,
+ * modifying Title/Subtitle text in a specific TextSection,
+ * and transition to Parent / Child TextSectionList
+ */
+public class ConfigElementController extends MainPanelController {
 
     @FXML
     private ListView<String> fontPresetListView;
 
+    private TextSection currentTextSection;
+
+    /**
+     * Method run upon transition into this .fxml element
+     * Used to set up UI elements and populate them with values from inside the TextSection
+     * @param currentTextSection opened text section
+     */
     public void init(TextSection currentTextSection) {
-        ObservableList<String> data = FXCollections.observableArrayList(currentTextSection.fontPresets.stream().map(FontPreset::toListViewString).collect(Collectors.toList()));
-        fontPresetListView.setItems(data);
-        fontPresetListView.setOnMouseClicked(click -> {
-            if (click.getClickCount() == 2) {
-                List<FontPreset> fontPresetList = currentTextSection.fontPresets;
-                FontPreset preset = fontPresetList.stream().filter(el -> el.equalsString(fontPresetListView.getSelectionModel()
-                        .getSelectedItem())).findFirst().get();
-                FontPresetPickerDialogBox dialogBox = new FontPresetPickerDialogBox(preset.clone(), App.stage, (value) -> {
-                    int index =  fontPresetList.indexOf(fontPresetList.stream().filter(el -> el.getUuid().equals(((FontPreset)value).getUuid())).findFirst().get());
-                    fontPresetList.remove(index);
-                    fontPresetList.add(index, (FontPreset)value);
-                    currentTextSection.setFontPresets(fontPresetList);
-                    ObservableList<String> data1 = FXCollections.observableArrayList(fontPresetList.stream().map(FontPreset::toListViewString).collect(Collectors.toList()));
-                    fontPresetListView.setItems(data1);
-                });
-                dialogBox.open();
-            }
-        });
+        this.currentTextSection = currentTextSection;
+        setUpFontPresetListView();
     }
 
     private void popFromNest() {
 
+    }
+
+    /**
+     * Method for setting up Font Preset List View.
+     * First it grabs all font presets for this text section and puts their string representation into list
+     * then applies a listener on a double click, which opens a FontPresetPickerDialogBox in which
+     * user can edit already existing font preset
+     */
+    private void setUpFontPresetListView() {
+        setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
     }
 }

@@ -51,15 +51,15 @@ public class MainSection extends TextSection {
         }
         return null;
     }
-    public void setFontPresets(List<FontPreset> presets) {
-        this.fontPresets = presets;
+    public void setFontPresetList(List<FontPreset> presets) {
+        this.fontPresetList = presets;
         if(textSectionList != null) {
             textSectionList.conditionallySetFontPresets(getChildrenFontPresets());
         }
     }
     public void setTextSectionList(TextSectionList list) {
         this.textSectionList = list;
-        if(this.fontPresets != null) {
+        if(this.fontPresetList != null) {
             textSectionList.conditionallySetFontPresets(getChildrenFontPresets());
         }
     }

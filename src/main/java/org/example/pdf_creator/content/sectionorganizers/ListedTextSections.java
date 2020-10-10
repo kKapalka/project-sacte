@@ -69,4 +69,5 @@ public class ListedTextSections extends TextSectionList {
     public TextSectionListType getTextSectionListType() {
         return TextSectionListType.LIST;
     }
+
 }

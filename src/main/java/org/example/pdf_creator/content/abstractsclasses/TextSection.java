@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javafx.scene.text.Font;
 import org.example.pdf_creator.content.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -19,7 +18,6 @@ import com.itextpdf.layout.element.Paragraph;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.pdf_creator.factories.TextSectionListType;
 
 /**
  * Representation of a single portion of content inside a PDF document.
@@ -38,14 +36,14 @@ import org.example.pdf_creator.factories.TextSectionListType;
             @JsonSubTypes.Type(value = Subsection.class, name = "Subsection"),
             @JsonSubTypes.Type(value = Content.class, name = "TopToDownContent")
 })
-public abstract class TextSection implements Comparable<TextSection>{
+public abstract class TextSection implements Comparable<TextSection>, FontPresetListContainer{
     private UUID uuid;
     private String title;
     private String subtitle;
     private List<String> tags;
     private int priority;
     private ITitleHandler titleHandler;
-    public List<FontPreset> fontPresets;
+    public List<FontPreset> fontPresetList;
     private boolean usingParentFontPresets;
     private boolean isSelected;
 
@@ -57,7 +55,7 @@ public abstract class TextSection implements Comparable<TextSection>{
         this.priority = priority;
         this.titleHandler = titleHandler;
         this.setUsingParentFontPresets(true);
-        this.setFontPresets(fontPresets);
+        this.setFontPresetList(fontPresets);
         this.isSelected = false;
     }
 
@@ -133,15 +131,15 @@ public abstract class TextSection implements Comparable<TextSection>{
 
     @JsonIgnore
     public FontPreset getSectionFontPreset() {
-        return fontPresets.get(0);
+        return fontPresetList.get(0);
     }
 
     @JsonIgnore
     public List<FontPreset> getChildrenFontPresets() {
 
         List<FontPreset> childrenFontPresets = new ArrayList<>();
-        fontPresets.forEach(el -> childrenFontPresets.add(el.clone()));
-        if(fontPresets.size() > 1) {
+        fontPresetList.forEach(el -> childrenFontPresets.add(el.clone()));
+        if(fontPresetList.size() > 1) {
             childrenFontPresets.remove(0);
         }
         return childrenFontPresets;
