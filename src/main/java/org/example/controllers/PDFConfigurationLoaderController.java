@@ -10,6 +10,11 @@ import org.example.pdf_creator.content.enums.MessageCode;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Controller for the loading panel for PdfCreationConfiguration - hello.fxml
+ * Supplies methods for: creating new configuration file, loading a configuration from file,
+ * and transition from 'hello.fxml' to 'config-list.fxml'
+ */
 public class PDFConfigurationLoaderController {
 
     public void saveConfiguration() {
@@ -17,7 +22,6 @@ public class PDFConfigurationLoaderController {
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(App.stage);
-        System.out.println(App.pdfCreationConfiguration);
         if (file != null) {
             System.out.println(JSONReadWriteUtils.writePDFConfigurationToFile(App.pdfCreationConfiguration,
                     file.getAbsolutePath()));
@@ -26,6 +30,11 @@ public class PDFConfigurationLoaderController {
         }
     }
 
+    /**
+     * Method for loading PdfCreationConfiguration from a JSON file.
+     * Opens a FileChooser dialog opening .JSON files only,
+     * reads it as object of this class, and transitions to 'config-list.fxml'
+     */
     public void loadConfigurationFromFile() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
@@ -36,6 +45,9 @@ public class PDFConfigurationLoaderController {
         }
     }
 
+    /**
+     * Method for loading empty PdfCreationConfiguration
+     */
     public void loadEmptyConfiguration() {
         loadConfiguration(new PdfCreationConfiguration());
     }

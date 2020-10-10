@@ -16,8 +16,19 @@ import com.itextpdf.layout.element.LineSeparator;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * Class used to save supplied PdfCreationConfiguration as a PDF file itself.
+ * Handles: display of PDF saving dialog box,
+ * and creation of PDF document itself
+ */
 public class PdfCreationEngine {
 
+    /**
+     * Method for displaying PDF export dialog window, and initializing PDF document creation
+     * @param stage app stage
+     * @param configuration configuration for PDF file export
+     * @return OPERATION_ABORTED if aborted, otherwise refer to createPdfDocument method
+     */
     public MessageCode displaySavePDFDialog(Stage stage, PdfCreationConfiguration configuration) {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
@@ -31,6 +42,14 @@ public class PdfCreationEngine {
         return MessageCode.OPERATION_ABORTED;
     }
 
+    /**
+     * Method used for creating PDF document
+     * A file is created, and then each element of a configuration's text section list
+     * spits out its content into it, separated by a black line if required.
+     * @param file file to save PDF file under
+     * @param configuration configuration for PDF file export
+     * @return OPERATION_FAILED if failed, OPERATION_SUCCESSFUL if successful
+     */
     MessageCode createPDFDocument(File file, PdfCreationConfiguration configuration) {
         try {
             PdfWriter writer = new PdfWriter(new FileOutputStream(file));

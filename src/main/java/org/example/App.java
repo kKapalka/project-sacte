@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JavaFX App
+ * Project SACTE application base
  */
 public class App extends Application {
 
@@ -51,7 +51,7 @@ public class App extends Application {
         menuHandler = new MenuHandler();
         menuHandler.addMenuItemToMenu(0, "Zapisz", this.PDFConfigurationLoaderController::saveConfiguration,false, KeyCode.S);
         menuHandler.addMenuItemToMenu(0, "Wczytaj", this.PDFConfigurationLoaderController::loadConfigurationFromFile,true, KeyCode.L);
-        menuHandler.addMenuItemToMenu(0, "Eksportuj do PDF", this::saveFile,false, KeyCode.P);
+        menuHandler.addMenuItemToMenu(0, "Eksportuj do PDF", this::initExportToPDF,false, KeyCode.P);
         borderPane.setTop(menuHandler.getMenuBar());
         borderPane.setCenter(loadFXML("hello"));
         scene = new Scene(borderPane, 900, 600);
@@ -93,7 +93,7 @@ public class App extends Application {
         launch();
     }
 
-    public void saveFile() {
+    public void initExportToPDF() {
         if(App.pdfCreationConfiguration == null) {
             System.out.println("No file configuration detected. Save aborted");
         } else {
@@ -110,6 +110,7 @@ public class App extends Application {
 
     public void setConfig(PdfCreationConfiguration config) {
         App.pdfCreationConfiguration = config;
+        currentNestOfTextSections = new ArrayList<>();
     }
 
     static void initForTextSection(TextSection section) {

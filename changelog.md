@@ -9,6 +9,7 @@
 * refactored TextSection and TextSectionList
 * created a FontPresetListContainer interface to be used inside this new class
 * beautified FontPresetPickerDialogBoxController class
+* added comments to the rest of classes
 
 ### 13.09.2020
 * Added labels and buttons to 'config-list.fxml'

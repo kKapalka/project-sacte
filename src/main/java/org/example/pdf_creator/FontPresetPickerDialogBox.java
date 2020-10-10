@@ -13,6 +13,10 @@ import org.example.pdf_creator.content.FontPreset;
 
 import java.io.IOException;
 
+/**
+ * Class for opening a font preset picker dialog box.
+ * Handles the display of dialog box as a modal window
+ */
 @Data
 public class FontPresetPickerDialogBox {
 

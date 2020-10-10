@@ -8,11 +8,22 @@ import org.example.pdf_creator.content.enums.MessageCode;
 import org.example.pdf_creator.content.PdfCreationConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Utility class used for reading and writing PdfCreationConfiguration objects
+ * to and from JSON files
+ */
 public class JSONReadWriteUtils {
 
+    /**
+     * Method for writing PdfCreationConfiguration.
+     * Creates a file at the supplpied path,
+     * and writes supplied PdfCreationConfiguration as string into it
+     * @param configuration configuration to be saved
+     * @param filePath path to file where configuration needs to be saved
+     * @return OPERATION_FAILED if failed, OPERATION_SUCCESFUL if succesful
+     */
     public static MessageCode writePDFConfigurationToFile(PdfCreationConfiguration configuration, String filePath) {
         try (FileWriter file = new FileWriter(filePath)) {
-            System.out.println(new ObjectMapper().writeValueAsString(configuration));
             file.write(new ObjectMapper().writeValueAsString(configuration));
             file.flush();
         } catch (IOException e) {
@@ -22,12 +33,19 @@ public class JSONReadWriteUtils {
         return MessageCode.OPERATION_SUCCESFUL;
     }
 
+    /**
+     * Method for writing PdfCreationConfiguration.
+     * Accesses a file at the supplpied path,
+     * and reads its contents as PdfCreationConfiguration.
+     * VERY strict format, so be careful
+     * @param filePath path to configuration file
+     * @return configuration found under the file
+     */
     public static PdfCreationConfiguration readPdfConfigurationFromFile(String filePath) {
         try (FileReader reader = new FileReader(filePath))
         {
             PdfCreationConfiguration configuration = new ObjectMapper().readValue(reader,
                   PdfCreationConfiguration.class);
-            System.out.println(configuration);
             return configuration;
         } catch (FileNotFoundException e) {
             e.printStackTrace();

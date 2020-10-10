@@ -26,6 +26,6 @@
             <Text layoutX="50.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Podtytuł sekcji" textAlignment="CENTER" wrappingWidth="125.0" />
          </children>
       </Pane>
-      <Button fx:id="confirmChanges" layoutX="175.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Potwierdź" />
+      <Button fx:id="confirmChanges" layoutX="175.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Potwierdź" onAction="#onConfirmChanges" />
    </children>
 </Pane>

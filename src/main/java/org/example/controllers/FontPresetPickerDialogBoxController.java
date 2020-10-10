@@ -1,8 +1,6 @@
 package org.example.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
@@ -15,7 +13,7 @@ import java.util.regex.Pattern;
 
 /**
  * Controller for dialog box for font preset - file: font-preset-setter.fxml
- * Contains 2 sets of TextField and ColorPicker inputs, ine for title, other for subtitle
+ * Contains 2 sets of TextField and ColorPicker inputs, one for title, other for subtitle
  * TextField has input validation which blocks all non-number values.
  * Has 'cancel' and 'confirm changes'
  */
@@ -31,8 +29,6 @@ public class FontPresetPickerDialogBoxController {
     private ColorPicker titleColorInput;
     @FXML
     private ColorPicker subtitleColorInput;
-    @FXML
-    private Button confirmChanges;
 
     private FontPreset parent;
     private ModalDialogOnCloseListener listener;
@@ -50,7 +46,6 @@ public class FontPresetPickerDialogBoxController {
         setUpFontSizeInputField(subtitleSizeField, parent.getSubtitleSize());
         setUpColorInput(titleColorInput, parent.getTitleColorRgba());
         setUpColorInput(subtitleColorInput, parent.getSubtitleColorRgba());
-        confirmChanges.setOnAction(this::onConfirmChanges);
     }
 
     /**
@@ -86,9 +81,8 @@ public class FontPresetPickerDialogBoxController {
      * Method which runs after confirming all the changes.
      * Font Preset object is changed using values from input fields
      * and resulting object is passed to the listener and its execute(object) method is called
-     * @param event button press event
      */
-    private void onConfirmChanges(ActionEvent event) {
+    public void onConfirmChanges() {
         parent.setTitleSize(Integer.parseInt(titleSizeField.getText()));
         parent.setSubtitleSize(Integer.parseInt(subtitleSizeField.getText()));
         Color c = subtitleColorInput.getValue();
