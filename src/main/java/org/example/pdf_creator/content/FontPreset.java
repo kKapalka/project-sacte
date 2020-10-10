@@ -2,7 +2,6 @@ package org.example.pdf_creator.content;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.UUID;

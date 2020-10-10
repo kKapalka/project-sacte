@@ -11,8 +11,19 @@ import org.example.pdf_creator.content.FontPresetListContainer;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Base class for controllers for config-list.fxml and config-element.fxml
+ * Contains set up methods for UI elements used inside both classes:
+ * Font Preset List View
+ */
 public class MainPanelController {
 
+    /**
+     * Method for setting up Font Preset List View.
+     * First it grabs all font presets for this text section and puts their string representation into list
+     * then applies a listener on a double click, which opens a FontPresetPickerDialogBox in which
+     * user can edit already existing font preset
+     */
     public void setUpFontPresetListViewWithParameters(ListView<String> fontPresetListView, FontPresetListContainer fontPresetListContainer) {
         ObservableList<String> data = FXCollections.observableArrayList(fontPresetListContainer.getFontPresetList().stream().map(FontPreset::toListViewString).collect(Collectors.toList()));
         fontPresetListView.setItems(data);

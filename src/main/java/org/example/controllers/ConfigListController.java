@@ -46,7 +46,7 @@ public class ConfigListController extends MainPanelController {
     public void init(TextSectionList currentTextSectionList) {
         this.textSectionList = currentTextSectionList;
         setUpListHandlerChoiceBox();
-        setUpFontPresetListView();
+        setUpFontPresetListViewWithParameters(this.fontPresetListView, this.textSectionList);
         applyListenerOnNewPresetButton();
         conditionallyCoverUIElementsBasedOnTextSectionListType();
 
@@ -58,17 +58,6 @@ public class ConfigListController extends MainPanelController {
         listHandlerChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> {
             this.textSectionList = listHandlerChoiceBox.getItems().get(new_value.intValue()).createList(textSectionList);
         });
-    }
-
-
-    /**
-     * Method for setting up Font Preset List View.
-     * First it grabs all font presets for this text section and puts their string representation into list
-     * then applies a listener on a double click, which opens a FontPresetPickerDialogBox in which
-     * user can edit already existing font preset
-     */
-    private void setUpFontPresetListView() {
-        setUpFontPresetListViewWithParameters(this.fontPresetListView, this.textSectionList);
     }
 
     private void applyListenerOnNewPresetButton() {

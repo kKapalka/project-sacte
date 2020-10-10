@@ -1,16 +1,8 @@
 package org.example.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import org.example.App;
-import org.example.pdf_creator.FontPresetPickerDialogBox;
-import org.example.pdf_creator.content.FontPreset;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Controller for config-element.fxml
@@ -33,20 +25,11 @@ public class ConfigElementController extends MainPanelController {
      */
     public void init(TextSection currentTextSection) {
         this.currentTextSection = currentTextSection;
-        setUpFontPresetListView();
+        setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
     }
 
     private void popFromNest() {
 
     }
 
-    /**
-     * Method for setting up Font Preset List View.
-     * First it grabs all font presets for this text section and puts their string representation into list
-     * then applies a listener on a double click, which opens a FontPresetPickerDialogBox in which
-     * user can edit already existing font preset
-     */
-    private void setUpFontPresetListView() {
-        setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
-    }
 }

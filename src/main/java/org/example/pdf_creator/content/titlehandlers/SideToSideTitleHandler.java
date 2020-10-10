@@ -1,6 +1,5 @@
 package org.example.pdf_creator.content.titlehandlers;
 
-import com.itextpdf.kernel.pdf.canvas.draw.ILineDrawer;
 import com.itextpdf.layout.element.Div;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Tab;

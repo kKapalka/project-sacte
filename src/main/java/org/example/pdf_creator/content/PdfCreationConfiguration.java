@@ -1,9 +1,7 @@
 package org.example.pdf_creator.content;
 
 import com.itextpdf.layout.element.BlockElement;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
 import org.example.pdf_creator.factories.TextSectionListType;

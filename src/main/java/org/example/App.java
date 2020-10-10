@@ -1,26 +1,8 @@
 package org.example;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
-import org.example.controllers.ConfigElementController;
-import org.example.controllers.ConfigListController;
-import org.example.controllers.PDFConfigurationLoaderController;
-import org.example.pdf_creator.FontPresetPickerDialogBox;
-import org.example.pdf_creator.PdfCreationEngine;
-import org.example.pdf_creator.content.*;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.font.PdfFontFactory;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,8 +10,18 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.example.controllers.ConfigElementController;
+import org.example.controllers.ConfigListController;
+import org.example.controllers.PDFConfigurationLoaderController;
+import org.example.pdf_creator.PdfCreationEngine;
+import org.example.pdf_creator.content.FontStyleSingleton;
+import org.example.pdf_creator.content.PdfCreationConfiguration;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JavaFX App
