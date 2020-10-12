@@ -25,7 +25,8 @@ public class ConfigElementController extends MainPanelController {
      */
     public void init(TextSection currentTextSection) {
         this.currentTextSection = currentTextSection;
-        setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
+        System.out.println(currentTextSection);
+        //setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
     }
 
     private void popFromNest() {

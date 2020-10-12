@@ -13,7 +13,6 @@ import java.util.List;
  * Implementation of TextSection in its base form
  */
 @Data
-@AllArgsConstructor
 @ToString(callSuper = true)
 public class Content extends TextSection {
     public Content(String title, String subtitle, List<String> tags, int priority, ITitleHandler titleHandler, List<FontPreset> fontPresets) {
@@ -27,5 +26,9 @@ public class Content extends TextSection {
 
     public Content(String title, String subtitle, List<String> tags, int priority, ITitleHandler titleHandler) {
         super(title, subtitle, tags, priority, titleHandler, null);
+    }
+
+    public Content() {
+        super();
     }
 }

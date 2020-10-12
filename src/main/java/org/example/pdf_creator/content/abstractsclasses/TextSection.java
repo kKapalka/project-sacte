@@ -18,6 +18,7 @@ import com.itextpdf.layout.element.Paragraph;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.pdf_creator.content.titlehandlers.TopToDownTitleHandler;
 
 /**
  * Representation of a single portion of content inside a PDF document.
@@ -29,7 +30,6 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @JsonTypeInfo( use = JsonTypeInfo.Id.NAME, property = "type")
         @JsonSubTypes({
             @JsonSubTypes.Type(value = MainSection.class, name = "MainSection"),
@@ -57,6 +57,10 @@ public abstract class TextSection implements Comparable<TextSection>, FontPreset
         this.setUsingParentFontPresets(true);
         this.setFontPresetList(fontPresets);
         this.isSelected = false;
+    }
+
+    public TextSection() {
+        this("", "", new ArrayList<>(), 1, new TopToDownTitleHandler(), new ArrayList<>());
     }
 
     /**

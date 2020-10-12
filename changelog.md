@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 12.10.2020
+* Added Text Section Lists handling of single click, doubleClick
+* Added handling of 'Add New Section', 'move to left' and 'move to right' buttons
+* Added transition into child Text Section
+
 ### 10.10.2020
 * Added comments for most of the Pdf representation classes
 * added comments for both main .fxml file controllers

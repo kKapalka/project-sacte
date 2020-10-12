@@ -17,6 +17,7 @@ import org.example.pdf_creator.content.abstractsclasses.TextSection;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
 import org.example.pdf_creator.factories.TextSectionListType;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
  * are hidden for TextSectionList of type PdfCreationConfiguration
  *
  * TODO section removing with confirmation
- * TODO and transition to and from text section
+ * TODO and transition from text section
  * TODO and hiding / showing text sections with tags.
  */
 public class ConfigListController extends MainPanelController {
@@ -93,19 +94,26 @@ public class ConfigListController extends MainPanelController {
     /**
      * Method run on clicking 'Add new section' button.
      * Creates a fresh TextSection and transitions into it.
+     * TODO apply fontPresets to new TextSection
      */
     public void onNewSectionButtonClicked() {
         TextSection textSection = textSectionList.getClass().equals(PdfCreationConfiguration.class) ? new MainSection() : new Subsection();
+        textSectionList.getTextSectionList().add(textSection);
         openSection(textSection);
     }
 
     /**
      * Transition method into new / child Text Section
-     * TODO this
      * @param textSection textSection
      */
     private void openSection(TextSection textSection) {
+        App.currentNestOfTextSections.add(textSection);
         System.out.println("Transition to new section: "+textSection);
+        try {
+            App.setRoot("config-element");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

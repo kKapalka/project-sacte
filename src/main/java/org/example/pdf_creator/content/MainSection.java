@@ -1,6 +1,7 @@
 package org.example.pdf_creator.content;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
@@ -20,7 +21,6 @@ import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class MainSection extends TextSection {
     private File icon;
@@ -34,6 +34,14 @@ public class MainSection extends TextSection {
         this.setTextSectionList(textSectionList);
         this.setUsingParentFontPresets(false);
         this.hasLineDivider = hasLineDivider;
+    }
+
+    public MainSection() {
+        super();
+        this.icon = null;
+        this.setTextSectionList(null);
+        this.setUsingParentFontPresets(false);
+        this.hasLineDivider = true;
     }
 
     @Override
@@ -53,13 +61,13 @@ public class MainSection extends TextSection {
     }
     public void setFontPresetList(List<FontPreset> presets) {
         this.fontPresetList = presets;
-        if(textSectionList != null) {
+        if(textSectionList != null && presets != null) {
             textSectionList.conditionallySetFontPresets(getChildrenFontPresets());
         }
     }
     public void setTextSectionList(TextSectionList list) {
         this.textSectionList = list;
-        if(this.fontPresetList != null) {
+        if(this.fontPresetList != null && list != null) {
             textSectionList.conditionallySetFontPresets(getChildrenFontPresets());
         }
     }

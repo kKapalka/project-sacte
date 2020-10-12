@@ -16,7 +16,6 @@ import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
  * Type of TextSection which has its own TextSectionList
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
 public class Subsection extends TextSection {
@@ -31,6 +30,11 @@ public class Subsection extends TextSection {
     public Subsection(String title, String subtitle, List<String> tags, int priority, ITitleHandler titleHandler, TextSectionList contentList) {
         super(title, subtitle, tags, priority, titleHandler, null);
         this.setContentList(contentList);
+    }
+
+    public Subsection() {
+        super();
+        this.setContentList(null);
     }
 
     @Override
