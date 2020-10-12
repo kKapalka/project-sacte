@@ -3,6 +3,7 @@ package org.example.controllers;
 import javafx.stage.FileChooser;
 import org.example.App;
 import org.example.AppSingletonAccessPoint;
+import org.example.MyMocks;
 import org.example.pdf_creator.JSONReadWriteUtils;
 import org.example.pdf_creator.content.PdfCreationConfiguration;
 import org.example.pdf_creator.content.enums.MessageCode;
@@ -49,7 +50,7 @@ public class PDFConfigurationLoaderController {
      * Method for loading empty PdfCreationConfiguration
      */
     public void loadEmptyConfiguration() {
-        loadConfiguration(new PdfCreationConfiguration());
+        loadConfiguration(MyMocks.config);
     }
 
     private void loadConfiguration(PdfCreationConfiguration configuration) {

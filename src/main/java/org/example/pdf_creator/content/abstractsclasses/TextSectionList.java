@@ -101,4 +101,13 @@ public abstract class TextSectionList implements FontPresetListContainer {
     public List<TextSection> getSelectedTextSections() {
         return this.textSectionList.stream().filter(TextSection::isSelected).collect(Collectors.toList());
     }
+
+    /**
+     * Method for returning not selected text sections
+     * @return all text sections which are selected by user for PDF exporting
+     */
+    @JsonIgnore
+    public List<TextSection> getNonSelectedTextSections() {
+        return this.textSectionList.stream().filter(el -> !el.isSelected()).collect(Collectors.toList());
+    }
 }
