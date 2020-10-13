@@ -36,12 +36,16 @@ public class MainSection extends TextSection {
         this.hasLineDivider = hasLineDivider;
     }
 
-    public MainSection() {
-        super();
+    public MainSection(List<FontPreset> fontPresets) {
+        super(fontPresets);
         this.icon = null;
         this.setTextSectionList(null);
         this.setUsingParentFontPresets(false);
         this.hasLineDivider = true;
+    }
+
+    public MainSection() {
+        this(new ArrayList<>());
     }
 
     @Override

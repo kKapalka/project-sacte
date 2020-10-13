@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
  * are hidden for TextSectionList of type PdfCreationConfiguration
  *
  * TODO section removing with confirmation
- * TODO and transition from text section
  * TODO and hiding / showing text sections with tags.
  */
 public class ConfigListController extends MainPanelController {
@@ -46,6 +45,8 @@ public class ConfigListController extends MainPanelController {
     private ListView<String> allSectionsListView;
     @FXML
     private ListView<String> selectedSectionsListView;
+    @FXML
+    private Button returnToSectionButton;
 
     private TextSection highlightedTextSection;
 
@@ -60,7 +61,7 @@ public class ConfigListController extends MainPanelController {
         this.textSectionList = currentTextSectionList;
         setUpListHandlerChoiceBox();
         setUpFontPresetListViewWithParameters(this.fontPresetListView, this.textSectionList);
-        conditionallyCoverUIElementsBasedOnTextSectionListType();
+        conditionallyCoverUIElementsBasedOnTextSectionListType(this.textSectionList instanceof PdfCreationConfiguration);
         updateTextSectionListViews();
     }
 
@@ -97,7 +98,7 @@ public class ConfigListController extends MainPanelController {
      * TODO apply fontPresets to new TextSection
      */
     public void onNewSectionButtonClicked() {
-        TextSection textSection = textSectionList.getClass().equals(PdfCreationConfiguration.class) ? new MainSection() : new Subsection();
+        TextSection textSection = textSectionList.getClass().equals(PdfCreationConfiguration.class) ? new MainSection(textSectionList.getChildrenFontPresets()) : new Subsection(textSectionList.getChildrenFontPresets());
         textSectionList.getTextSectionList().add(textSection);
         openSection(textSection);
     }
@@ -117,23 +118,42 @@ public class ConfigListController extends MainPanelController {
     }
 
     /**
+     * Transition to TextSection view.
+     * Since TextSectionList object which can transition BACK into TextSection is a parameter of aforementioned
+     * TextSection, this method simply flips the view to 'config-element.fxml' and initializes the view for it
+     */
+    public void returnToTextSectionView() {
+        System.out.println("Transition to - this - text section view");
+        try {
+            App.setRoot("config-element");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Method run on clicking 'Move to left' button
-     * Unselects highlighted Text Section
-     * and updates list views
      */
     public void onMoveToLeftSelectedTextSection() {
-        highlightedTextSection.setSelected(false);
-        updateTextSectionListViews();
+        setHighlightedTextSectionAsSelected(false);
     }
 
     /**
      * Method run on clicking 'Move to right' button
-     * Unselects highlighted Text Section
-     * and updates list views
      */
     public void onMoveToRightSelectedTextSection() {
-        highlightedTextSection.setSelected(true);
+        setHighlightedTextSectionAsSelected(true);
+    }
+
+    /**
+     * Method for setting highlighted text sections as selected / unselected
+     * Also updates list views, and clears highlight
+     * @param selected flag for highlighted text section selection
+     */
+    private void setHighlightedTextSectionAsSelected(boolean selected) {
+        highlightedTextSection.setSelected(selected);
         updateTextSectionListViews();
+        highlightedTextSection = null;
     }
 
     /**
@@ -168,10 +188,10 @@ public class ConfigListController extends MainPanelController {
     /**
      * Method for conditional covering of select UI elements.
      * Covers: ListType selection and return to parent TextSection button
-     * TODO return to parent TextSection button
      */
-    private void conditionallyCoverUIElementsBasedOnTextSectionListType() {
-        listHandlerChoicePane.setVisible(!(this.textSectionList instanceof PdfCreationConfiguration));
+    private void conditionallyCoverUIElementsBasedOnTextSectionListType(boolean conditionallyVisible) {
+        listHandlerChoicePane.setVisible(conditionallyVisible);
+        returnToSectionButton.setVisible(conditionallyVisible);
     }
 
 }

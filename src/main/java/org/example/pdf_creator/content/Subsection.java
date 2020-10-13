@@ -1,5 +1,6 @@
 package org.example.pdf_creator.content;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
@@ -32,8 +33,13 @@ public class Subsection extends TextSection {
         this.setContentList(contentList);
     }
 
+
     public Subsection() {
-        super();
+        this(new ArrayList<>());
+    }
+
+    public Subsection(List<FontPreset> fontPresets) {
+        super(fontPresets);
         this.setContentList(null);
     }
 

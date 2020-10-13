@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 13.10.2020
+* Added transition back from textSectionList to TextSection, and button, and conditional hiding
+* Added creation of FontPresetList in newly created TextSections
+
 ### 12.10.2020
 * Added Text Section Lists handling of single click, doubleClick
 * Added handling of 'Add New Section', 'move to left' and 'move to right' buttons

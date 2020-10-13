@@ -21,16 +21,17 @@
             <ChoiceBox fx:id="listHandlerChoiceBox" layoutY="30.0" prefWidth="200.0" />
          </children>
       </Pane>
-      <Button fx:id="move_to_right" layoutX="335.0" layoutY="278.0" mnemonicParsing="false" text="-&gt;" onMouseClicked="#onMoveToRightSelectedTextSection"/>
-      <Button fx:id="move_to_left" layoutX="335.0" layoutY="378.0" mnemonicParsing="false" text="&lt;-" onMouseClicked="#onMoveToLeftSelectedTextSection"/>
+      <Button fx:id="move_to_right" layoutX="335.0" layoutY="278.0" mnemonicParsing="false" onMouseClicked="#onMoveToRightSelectedTextSection" text="-&gt;" />
+      <Button fx:id="move_to_left" layoutX="335.0" layoutY="378.0" mnemonicParsing="false" onMouseClicked="#onMoveToLeftSelectedTextSection" text="&lt;-" />
       <ListView fx:id="fontPresetListView" layoutX="660.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" />
       <Text fx:id="tagListText" layoutX="100.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista tagów" textAlignment="CENTER" wrappingWidth="499.9999999999999" />
       <Text fx:id="sectionListText" layoutX="100.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wszystkie sekcje" textAlignment="CENTER" wrappingWidth="199.9999999999999" />
       <Text fx:id="sectionListText1" layoutX="400.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybrane sekcje" textAlignment="CENTER" wrappingWidth="199.9999999999999" />
       <Text fx:id="sectionListText11" layoutX="660.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presety czcionek" textAlignment="CENTER" wrappingWidth="199.9999999999999" />
-      <Button fx:id="newSectionButton" layoutX="100.0" layoutY="515.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Dodaj nową sekcję" onMouseClicked="#onNewSectionButtonClicked"/>
-      <Button fx:id="newPresetButton" layoutX="660.0" layoutY="463.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Dodaj nowy preset" onMouseClicked="#onNewPresetButtonClicked" />
+      <Button fx:id="newSectionButton" layoutX="100.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#onNewSectionButtonClicked" prefHeight="25.0" prefWidth="200.0" text="Dodaj nową sekcję" />
+      <Button fx:id="newPresetButton" layoutX="660.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#onNewPresetButtonClicked" prefHeight="25.0" prefWidth="200.0" text="Dodaj nowy preset" />
       <ListView fx:id="allSectionsListView" layoutX="100.0" layoutY="203.0" prefHeight="300.0" prefWidth="200.0" />
       <ListView fx:id="selectedSectionsListView" layoutX="400.0" layoutY="203.0" prefHeight="300.0" prefWidth="200.0" />
+      <Button fx:id="returnToSectionButton" layoutX="100.0" layoutY="50.0" mnemonicParsing="false" onAction="#returnToTextSectionView" prefHeight="50.0" prefWidth="87.0" text="Powróć do widoku sekcji" textAlignment="RIGHT" wrapText="true" />
    </children>
 </Pane>

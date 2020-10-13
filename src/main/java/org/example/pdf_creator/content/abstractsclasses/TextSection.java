@@ -63,6 +63,10 @@ public abstract class TextSection implements Comparable<TextSection>, FontPreset
         this("", "", new ArrayList<>(), 1, new TopToDownTitleHandler(), new ArrayList<>());
     }
 
+    public TextSection(List<FontPreset> fontPresets) {
+        this("", "", new ArrayList<>(), 1, new TopToDownTitleHandler(), fontPresets);
+    }
+
     /**
      * Comparator used for positioning inside a PDF file
      * @param o other TextSection

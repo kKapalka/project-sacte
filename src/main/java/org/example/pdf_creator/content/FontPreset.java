@@ -21,6 +21,9 @@ public class FontPreset {
 
     public FontPreset() {
         this.uuid = UUID.randomUUID();
+        /*
+          Important, might pop up later - in println() uuid value seems to be null
+         */
     }
 
     public FontPreset(int titleSize, int[] titleColorRgba, int subtitleSize, int[] subtitleColorRgba) {

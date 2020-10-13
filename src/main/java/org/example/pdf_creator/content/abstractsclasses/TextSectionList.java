@@ -110,4 +110,14 @@ public abstract class TextSectionList implements FontPresetListContainer {
     public List<TextSection> getNonSelectedTextSections() {
         return this.textSectionList.stream().filter(el -> !el.isSelected()).collect(Collectors.toList());
     }
+
+    @JsonIgnore
+    public List<FontPreset> getChildrenFontPresets() {
+        List<FontPreset> childrenFontPresets = new ArrayList<>();
+        fontPresetList.forEach(el -> childrenFontPresets.add(el.clone()));
+        if(fontPresetList.size() > 1) {
+            childrenFontPresets.remove(0);
+        }
+        return childrenFontPresets;
+    }
 }
