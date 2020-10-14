@@ -5,7 +5,8 @@
 ### 14.10.2020
 * Tested PDF generation itself, in order to ensure everything is generated properly
 * Reintroduced mock config, placed it in .json file inside this project
-* Corrected PDF generation method - now it will only print selected text sections 
+* Corrected PDF generation method - now it will only print selected text sections
+* Corrected the conditional covering method 
 
 ### 13.10.2020
 * Added transition back from textSectionList to TextSection, and button, and conditional hiding

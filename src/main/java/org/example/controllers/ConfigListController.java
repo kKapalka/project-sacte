@@ -61,7 +61,7 @@ public class ConfigListController extends MainPanelController {
         this.textSectionList = currentTextSectionList;
         setUpListHandlerChoiceBox();
         setUpFontPresetListViewWithParameters(this.fontPresetListView, this.textSectionList);
-        conditionallyCoverUIElementsBasedOnTextSectionListType(this.textSectionList instanceof PdfCreationConfiguration);
+        conditionallyCoverUIElementsBasedOnTextSectionListType(!(this.textSectionList instanceof PdfCreationConfiguration));
         updateTextSectionListViews();
     }
 
