@@ -56,7 +56,7 @@ public abstract class TextSection implements Comparable<TextSection>, FontPreset
         this.titleHandler = titleHandler;
         this.setUsingParentFontPresets(true);
         this.setFontPresetList(fontPresets);
-        this.isSelected = false;
+        this.isSelected = true;
     }
 
     public TextSection() {
@@ -84,6 +84,9 @@ public abstract class TextSection implements Comparable<TextSection>, FontPreset
      * @return new div element
      */
     public IBlockElement prepareDiv() {
+        System.out.println(title);
+        System.out.println(subtitle);
+        System.out.println(this.getClass());
         Div div = new Div();
         div = titleHandler.handleTitleAndSubtitle(div, createTitle(), createSubtitle());
         div.add(new Paragraph(""));
@@ -133,9 +136,7 @@ public abstract class TextSection implements Comparable<TextSection>, FontPreset
         return para;
     }
 
-    public BlockElement createContent() {
-        return null;
-    }
+    public abstract BlockElement createContent();
 
     @JsonIgnore
     public FontPreset getSectionFontPreset() {

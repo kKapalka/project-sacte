@@ -103,7 +103,6 @@ public class App extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(App.pdfCreationConfiguration);
             System.out.println(engine.displaySavePDFDialog(stage, App.pdfCreationConfiguration));
         }
     }

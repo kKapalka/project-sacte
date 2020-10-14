@@ -55,7 +55,7 @@ public class PdfCreationEngine {
             PdfWriter writer = new PdfWriter(new FileOutputStream(file));
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
-            configuration.getTextSectionList().forEach(element -> {
+            configuration.getSelectedTextSections().forEach(element -> {
                 boolean noNullPointer = false;
                 while(!noNullPointer) {
                     try{

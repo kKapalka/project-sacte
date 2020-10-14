@@ -1,6 +1,7 @@
 package org.example.pdf_creator.content;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.itextpdf.layout.element.BlockElement;
 import lombok.Data;
 import lombok.ToString;
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
@@ -20,6 +21,7 @@ public class Content extends TextSection {
     }
 
     @Override
+    @JsonIgnore
     public TextSectionList getTextSectionList() {
         return null;
     }
@@ -30,5 +32,10 @@ public class Content extends TextSection {
 
     public Content() {
         super();
+    }
+
+    @Override
+    public BlockElement createContent() {
+        return null;
     }
 }

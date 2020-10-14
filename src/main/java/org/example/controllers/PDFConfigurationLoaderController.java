@@ -50,7 +50,7 @@ public class PDFConfigurationLoaderController {
      * Method for loading empty PdfCreationConfiguration
      */
     public void loadEmptyConfiguration() {
-        loadConfiguration(MyMocks.config);
+        loadConfiguration(new PdfCreationConfiguration());
     }
 
     private void loadConfiguration(PdfCreationConfiguration configuration) {
