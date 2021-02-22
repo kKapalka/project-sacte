@@ -8,6 +8,7 @@ module org.example {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;
     requires static lombok;
+    requires slf4j.api;
 
     opens org.example to javafx.fxml;
     opens org.example.controllers to javafx.fxml;

@@ -21,15 +21,19 @@ public class PDFConfigurationLoaderController {
     private static final String JSON_EXTENSION = "*.json";
 
     public void saveConfiguration() {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(JSON_EXTENSION_EXPRESSION, JSON_EXTENSION);
-        fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showSaveDialog(App.stage);
-        if (file != null) {
-            System.out.println(JSONReadWriteUtils.writePDFConfigurationToFile(App.pdfCreationConfiguration,
-                    file.getAbsolutePath()));
+        if(App.pdfCreationConfiguration == null) {
+            System.out.println("No file configuration detected. Save aborted");
         } else {
-            System.out.println(MessageCode.OPERATION_ABORTED);
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(JSON_EXTENSION_EXPRESSION,
+                  JSON_EXTENSION);
+            fileChooser.getExtensionFilters().add(extFilter);
+            File file = fileChooser.showSaveDialog(App.stage);
+            if(file != null) {
+                System.out.println(JSONReadWriteUtils.writePDFConfigurationToFile(App.pdfCreationConfiguration, file.getAbsolutePath()));
+            } else {
+                System.out.println(MessageCode.OPERATION_ABORTED);
+            }
         }
     }
 
