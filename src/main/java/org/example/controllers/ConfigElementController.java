@@ -74,6 +74,9 @@ public class ConfigElementController extends MainPanelController {
     public void returnToTextSectionListView() {
         log.debug("Transition to - this - text section view");
         popFromNest();
+        if(this.currentTextSection.getTitle().isBlank() && this.currentTextSection.getSubtitle().isBlank()) {
+            App.currentTextSectionList.textSectionList.remove(this.currentTextSection);
+        }
         transitionToConfigList();
     }
 

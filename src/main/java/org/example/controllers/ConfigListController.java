@@ -20,6 +20,7 @@ import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
 import org.example.pdf_creator.factories.TextSectionListType;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,7 @@ public class ConfigListController extends MainPanelController {
      */
     public void init(TextSectionList currentTextSectionList) {
         this.textSectionList = currentTextSectionList;
+        App.currentTextSectionList = currentTextSectionList;
         setUpListHandlerChoiceBox();
         setUpFontPresetListViewWithParameters(this.fontPresetListView, this.textSectionList);
         conditionallyCoverUIElementsBasedOnTextSectionListType(!(this.textSectionList instanceof PdfCreationConfiguration));
@@ -154,9 +156,11 @@ public class ConfigListController extends MainPanelController {
      * @param selected flag for highlighted text section selection
      */
     private void setHighlightedTextSectionAsSelected(boolean selected) {
-        highlightedTextSection.setSelected(selected);
-        updateTextSectionListViews();
-        highlightedTextSection = null;
+        if(highlightedTextSection != null) {
+            highlightedTextSection.setSelected(selected);
+            updateTextSectionListViews();
+            highlightedTextSection = null;
+        }
     }
 
     /**
@@ -177,11 +181,22 @@ public class ConfigListController extends MainPanelController {
      * @param textSections assigned text section data
      */
     private void populateTextSectionListViewWithData(ListView<String> listView, List<TextSection> textSections) {
-        ObservableList<String> data = FXCollections.observableArrayList(textSections.stream().map(TextSection::getTitle).collect(Collectors.toList()));
+        List<String> textSectionListViewData = new ArrayList<>();
+        for(int i = 0;i < textSections.size(); i++) {
+            //very ugly, but I needed access to index of an element
+            textSectionListViewData.add((i+1) + ": " + textSections.get(i).getTitle());
+        }
+        ObservableList<String> data =
+              FXCollections.observableArrayList(textSectionListViewData);
+        System.out.println(textSectionListViewData);
         listView.setItems(data);
         listView.setOnMouseClicked(click -> {
             if(click.getClickCount() == 1) {
-                highlightedTextSection = textSectionList.getTextSectionList().stream().filter(el -> el.getTitle().equals(listView.getSelectionModel().getSelectedItem())).findFirst().orElse(null);
+                highlightedTextSection =
+                      textSectionList.getTextSectionList().stream()
+                                     .filter(el -> listView.getSelectionModel().getSelectedItem().
+                                           contains((textSectionList.getTextSectionList().indexOf(el)+1)+": "+el.getTitle()))
+                                     .findFirst().orElse(null);
             } else if (click.getClickCount() == 2) {
                 openSection(highlightedTextSection);
             }

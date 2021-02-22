@@ -37,6 +37,7 @@ public class App extends Application {
     private FontStyleSingleton fontCreator;
     public static List<TextSection> currentNestOfTextSections = new ArrayList<>();
     public static PdfCreationConfiguration pdfCreationConfiguration;
+    public static TextSectionList currentTextSectionList;
     private MenuHandler menuHandler;
     static FXMLLoader loader;
     public static BorderPane borderPane = new BorderPane();
@@ -119,5 +120,12 @@ public class App extends Application {
     }
     static void initForTextSectionList(TextSectionList textSectionList) {
         ((ConfigListController) loader.getController()).init(textSectionList);
+    }
+    public static void pushNewTextSectionToList(TextSection textSection) {
+        if(currentNestOfTextSections.size() == 1) {
+            pdfCreationConfiguration.textSectionList.add(textSection);
+        } else {
+
+        }
     }
 }

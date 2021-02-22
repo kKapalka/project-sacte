@@ -15,6 +15,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
+import org.example.pdf_creator.content.sectionorganizers.GridTextSections;
+import org.example.pdf_creator.content.sectionorganizers.ListedTextSections;
 
 /**
  * Type of TextSection which can have its own icon, create a line divider between
@@ -41,7 +43,7 @@ public class MainSection extends TextSection {
     public MainSection(List<FontPreset> fontPresets) {
         super(fontPresets);
         this.icon = null;
-        this.setTextSectionList(null);
+        this.setTextSectionList(new ListedTextSections());
         this.setUsingParentFontPresets(false);
         this.hasLineDivider = true;
     }
