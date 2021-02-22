@@ -22,10 +22,12 @@ import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
 public class TwoColumnTitleHandler implements ITitleHandler {
 
     private float columnsRatio;
+    private static final float TITLE_HANDLER_MARGIN_SIDES = 5f;
 
     @Override
     public Div handleTitleAndSubtitle(Div div, Paragraph title, Paragraph subtitle) {
-        Table table = new Table(2, false).setMarginLeft(5f).setMarginRight(5f).useAllAvailableWidth();
+        Table table = new Table(2, false).setMarginLeft(TITLE_HANDLER_MARGIN_SIDES)
+                                         .setMarginRight(TITLE_HANDLER_MARGIN_SIDES).useAllAvailableWidth();
         UnitValue firstCell = new UnitValue(table.getWidth().getUnitType(), table.getWidth().getValue());
         UnitValue secondCell = new UnitValue(table.getWidth().getUnitType(), table.getWidth().getValue());
         firstCell.setValue(firstCell.getValue() * columnsRatio);

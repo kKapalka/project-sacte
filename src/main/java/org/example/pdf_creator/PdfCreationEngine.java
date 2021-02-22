@@ -23,6 +23,13 @@ import javafx.stage.Stage;
  */
 public class PdfCreationEngine {
 
+    // Offsets for created line dividers, in pixels
+    private static final float LINE_OFFSET_LEFT_RIGHT = 30f;
+    private static final float LINE_OFFSET_TOP_DOWN = 5f;
+    // Extension expressions for .pdf file chooser
+    private static final String PDF_EXTENSION_EXPRESSION = "PDF files (*.pdf)";
+    private static final String PDF_EXTENSION = "*.pdf";
+
     /**
      * Method for displaying PDF export dialog window, and initializing PDF document creation
      * @param stage app stage
@@ -31,7 +38,7 @@ public class PdfCreationEngine {
      */
     public MessageCode displaySavePDFDialog(Stage stage, PdfCreationConfiguration configuration) {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(PDF_EXTENSION_EXPRESSION, PDF_EXTENSION);
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(stage);
 
@@ -71,7 +78,7 @@ public class PdfCreationEngine {
                     line.setColor(ColorConstants.BLACK);
                     line.setLineWidth(1f);
                     LineSeparator ls = new LineSeparator(line);
-                    ls.setMargins(5f, 30f, 5f, 30f);
+                    ls.setMargins(LINE_OFFSET_TOP_DOWN, LINE_OFFSET_LEFT_RIGHT, LINE_OFFSET_TOP_DOWN, LINE_OFFSET_LEFT_RIGHT);
                     document.add(ls);
                 }
             });

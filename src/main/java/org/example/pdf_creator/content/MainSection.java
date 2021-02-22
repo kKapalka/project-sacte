@@ -11,6 +11,7 @@ import com.itextpdf.layout.element.Paragraph;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
@@ -19,6 +20,7 @@ import org.example.pdf_creator.content.abstractsclasses.TextSectionList;
  * Type of TextSection which can have its own icon, create a line divider between
  * this section and another one below it, and has its own TextSectionList
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @ToString(callSuper = true)

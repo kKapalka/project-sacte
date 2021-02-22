@@ -2,6 +2,9 @@
 
 # Changelog
 
+### 22.02.2021
+* Removed most of 'magical values' - converted them into parameterable static final values
+
 ### 14.10.2020
 * Tested PDF generation itself, in order to ensure everything is generated properly
 * Reintroduced mock config, placed it in .json file inside this project

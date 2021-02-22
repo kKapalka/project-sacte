@@ -70,7 +70,7 @@ public class FontPreset {
 
     /**
      * Method for displaying this FontPreset in a concise text representation to display in application
-     * @return
+     * @return string to display
      */
     public String toListViewString() {
         return "[(Title: "+ Arrays.toString(titleColorRgba) +", "+titleSize+"); Subtitle: "+ Arrays.toString(subtitleColorRgba) +", "+subtitleSize+")]";

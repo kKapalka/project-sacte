@@ -1,15 +1,14 @@
 package org.example.controllers;
 
-import javafx.stage.FileChooser;
+import java.io.File;
+import java.io.IOException;
 import org.example.App;
 import org.example.AppSingletonAccessPoint;
-import org.example.MyMocks;
 import org.example.pdf_creator.JSONReadWriteUtils;
 import org.example.pdf_creator.content.PdfCreationConfiguration;
 import org.example.pdf_creator.content.enums.MessageCode;
 
-import java.io.File;
-import java.io.IOException;
+import javafx.stage.FileChooser;
 
 /**
  * Controller for the loading panel for PdfCreationConfiguration - hello.fxml
@@ -18,9 +17,12 @@ import java.io.IOException;
  */
 public class PDFConfigurationLoaderController {
 
+    private static final String JSON_EXTENSION_EXPRESSION = "JSON files (*.json)";
+    private static final String JSON_EXTENSION = "*.json";
+
     public void saveConfiguration() {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(JSON_EXTENSION_EXPRESSION, JSON_EXTENSION);
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(App.stage);
         if (file != null) {
@@ -38,7 +40,7 @@ public class PDFConfigurationLoaderController {
      */
     public void loadConfigurationFromFile() {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(JSON_EXTENSION_EXPRESSION, JSON_EXTENSION);
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(App.stage);
         if (file != null) {

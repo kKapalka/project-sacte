@@ -8,10 +8,13 @@ import org.example.pdf_creator.content.enums.MessageCode;
 import org.example.pdf_creator.content.PdfCreationConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Utility class used for reading and writing PdfCreationConfiguration objects
  * to and from JSON files
  */
+@Slf4j
 public class JSONReadWriteUtils {
 
     /**
@@ -48,9 +51,9 @@ public class JSONReadWriteUtils {
                   PdfCreationConfiguration.class);
             return configuration;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            log.debug("File not found: "+e);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.debug("IO Exception: "+e);
         }
         return null;
     }

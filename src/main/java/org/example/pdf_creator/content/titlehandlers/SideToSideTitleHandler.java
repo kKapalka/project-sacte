@@ -23,15 +23,17 @@ import org.example.pdf_creator.content.enums.LineDrawerEnum;
 public class SideToSideTitleHandler implements ITitleHandler {
 
     private LineDrawerEnum lineDrawerEnum;
+    private static final float TITLE_HANDLER_MARGIN_SIDES = 5f;
+    private static final int TAB_STOP_TAB_POSITION = 1000;
 
     @Override
     public Div handleTitleAndSubtitle(Div div, Paragraph title, Paragraph subtitle) {
-        Paragraph oneParagraph = title.setMarginLeft(5f);
+        Paragraph oneParagraph = title.setMarginLeft(TITLE_HANDLER_MARGIN_SIDES);
         if(subtitle != null) {
-            oneParagraph.addTabStops(new TabStop(1000, TabAlignment.RIGHT, lineDrawerEnum.getLineDrawer()));
+            oneParagraph.addTabStops(new TabStop(TAB_STOP_TAB_POSITION, TabAlignment.RIGHT, lineDrawerEnum.getLineDrawer()));
             oneParagraph.add(new Tab()).add(subtitle);
         }
-        oneParagraph.setMarginRight(5f);
+        oneParagraph.setMarginRight(TITLE_HANDLER_MARGIN_SIDES);
         div.add(oneParagraph);
         return div;
     }
