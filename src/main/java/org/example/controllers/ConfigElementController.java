@@ -3,18 +3,19 @@ package org.example.controllers;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.example.App;
+import org.example.pdf_creator.FontPresetPickerDialogBox;
+import org.example.pdf_creator.content.FontPreset;
+import org.example.pdf_creator.content.abstractsclasses.TextSection;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import lombok.extern.slf4j.Slf4j;
-
-import org.example.App;
-import org.example.pdf_creator.FontPresetPickerDialogBox;
-import org.example.pdf_creator.content.FontPreset;
-import org.example.pdf_creator.content.abstractsclasses.TextSection;
 
 /**
  * Controller for config-element.fxml
@@ -30,6 +31,10 @@ public class ConfigElementController extends MainPanelController {
     private ListView<String> fontPresetListView;
     @FXML
     private Button returnToSectionListButton;
+    @FXML
+    private TextField titleTextField;
+    @FXML
+    private TextArea subtitleTextField;
 
     private TextSection currentTextSection;
 
@@ -41,6 +46,8 @@ public class ConfigElementController extends MainPanelController {
     public void init(TextSection currentTextSection) {
         this.currentTextSection = currentTextSection;
         setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
+        titleTextField.setText(currentTextSection.getTitle());
+        subtitleTextField.setText(currentTextSection.getSubtitle());
     }
 
     /**
@@ -72,6 +79,7 @@ public class ConfigElementController extends MainPanelController {
      * TextSectionList, this method simply flips the view to 'config-list.fxml' and initializes the view for it
      */
     public void returnToTextSectionListView() {
+        onNavigationAttempt();
         log.debug("Transition to - this - text section view");
         popFromNest();
         if(this.currentTextSection.getTitle().isBlank() && this.currentTextSection.getSubtitle().isBlank()) {
@@ -86,6 +94,7 @@ public class ConfigElementController extends MainPanelController {
      * of this TextSection
      */
     public void onTextSectionListOpenButtonClicked() {
+        onNavigationAttempt();
         log.debug("Opening new text section view");
         transitionToConfigList();
     }
@@ -99,5 +108,10 @@ public class ConfigElementController extends MainPanelController {
         } catch (IOException e) {
             log.error("Error while opening 'config-list' view file: "+e);
         }
+    }
+
+    public void onNavigationAttempt() {
+        currentTextSection.setTitle(titleTextField.getText());
+        currentTextSection.setSubtitle(subtitleTextField.getText());
     }
 }

@@ -125,7 +125,7 @@ public class App extends Application {
         if(currentNestOfTextSections.size() == 1) {
             pdfCreationConfiguration.textSectionList.add(textSection);
         } else {
-
+            currentTextSectionList.textSectionList.add(textSection);
         }
     }
 }

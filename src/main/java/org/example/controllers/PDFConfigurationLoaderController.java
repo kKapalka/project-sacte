@@ -26,16 +26,21 @@ public class PDFConfigurationLoaderController {
         if(App.pdfCreationConfiguration == null) {
             log.error("No file configuration detected. Save aborted");
         } else {
-            FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(JSON_EXTENSION_EXPRESSION,
-                  JSON_EXTENSION);
-            fileChooser.getExtensionFilters().add(extFilter);
-            File file = fileChooser.showSaveDialog(App.stage);
-            if(file != null) {
-                log.debug(JSONReadWriteUtils.writePDFConfigurationToFile(App.pdfCreationConfiguration,
-                      file.getAbsolutePath()).toString());
+            if(App.pdfCreationConfiguration.getSelectedTextSections().size() == 0) {
+                log.error("User has selected no sections to save. Save aborted");
             } else {
-                log.debug(MessageCode.OPERATION_ABORTED.toString());
+                FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(JSON_EXTENSION_EXPRESSION,
+                      JSON_EXTENSION);
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showSaveDialog(App.stage);
+                if(file != null) {
+                    log.debug(JSONReadWriteUtils
+                          .writePDFConfigurationToFile(App.pdfCreationConfiguration, file.getAbsolutePath())
+                          .toString());
+                } else {
+                    log.debug(MessageCode.OPERATION_ABORTED.toString());
+                }
             }
         }
     }

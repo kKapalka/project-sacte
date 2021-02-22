@@ -4,6 +4,11 @@
 
 ### 22.02.2021
 * Removed most of 'magical values' - converted them into parameterable static final values
+* Added new buttons and functionalities to 'config-section' view
+* Replaced old, ugly println() calls with new, dope log.debug() and log.error() calls
+* Added a fail-safe mechanism for NPE handling during document creation: if the NPE handling method is called too many times, a RuntimeException will be thrown
+* Now, user can actually set the title and subtitle of his text sections, and save/export them
+* Also added working slf4j dependencies
 
 ### 14.10.2020
 * Tested PDF generation itself, in order to ensure everything is generated properly
