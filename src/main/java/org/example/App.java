@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
+
 import org.example.controllers.ConfigElementController;
 import org.example.controllers.ConfigListController;
 import org.example.controllers.PDFConfigurationLoaderController;
@@ -26,6 +28,7 @@ import java.util.List;
 /**
  * Project SACTE application base
  */
+@Slf4j
 public class App extends Application {
 
     public static Scene scene;
@@ -83,8 +86,7 @@ public class App extends Application {
         try {
             return loader.load();
         } catch (IOException e) {
-            System.out.println("Problems occured while loading file: " + fxml + ".fxml");
-            e.printStackTrace();
+            log.error("Problems occured while loading file: " + fxml + ".fxml: "+e);
             return null;
         }
     }
@@ -95,7 +97,7 @@ public class App extends Application {
 
     public void initExportToPDF() {
         if(App.pdfCreationConfiguration == null) {
-            System.out.println("No file configuration detected. Save aborted");
+            log.error("No file configuration detected. Save aborted");
         } else {
             try {
                 fontCreator.setStandardFont(PdfFontFactory.createFont(StandardFonts.HELVETICA, PdfEncodings.CP1250));
@@ -103,7 +105,7 @@ public class App extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(engine.displaySavePDFDialog(stage, App.pdfCreationConfiguration));
+            log.debug(engine.displaySavePDFDialog(stage, App.pdfCreationConfiguration).toString());
         }
     }
 

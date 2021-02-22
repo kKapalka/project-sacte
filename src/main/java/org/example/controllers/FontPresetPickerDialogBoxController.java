@@ -59,8 +59,10 @@ public class FontPresetPickerDialogBoxController {
         textField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(), 0, change -> {
             String newText = change.getControlNewText();
             if (validNumberText.matcher(newText).matches()) {
-                return change ;
-            } else return null ;
+                return change;
+            } else{
+                return null;
+            }
         }));
         textField.setText("" + fontSize);
     }

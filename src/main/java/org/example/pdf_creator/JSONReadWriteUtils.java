@@ -30,7 +30,7 @@ public class JSONReadWriteUtils {
             file.write(new ObjectMapper().writeValueAsString(configuration));
             file.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while writing PDF configuration: "+e);
             return MessageCode.OPERATION_FAILED;
         }
         return MessageCode.OPERATION_SUCCESFUL;

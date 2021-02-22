@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+
 import org.example.App;
 import org.example.ModalDialogOnCloseListener;
 import org.example.controllers.FontPresetPickerDialogBoxController;
@@ -18,6 +20,7 @@ import java.io.IOException;
  * Handles the display of dialog box as a modal window
  */
 @Data
+@Slf4j
 public class FontPresetPickerDialogBox {
 
     public FontPresetPickerDialogBox(FontPreset parent, Stage parentStage, ModalDialogOnCloseListener listener) {
@@ -37,7 +40,7 @@ public class FontPresetPickerDialogBox {
         try {
             root = loader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while loading 'font-preset-setter' view file: "+e);
         }
         Scene scene = new Scene(root);
         dialog.setScene(scene);

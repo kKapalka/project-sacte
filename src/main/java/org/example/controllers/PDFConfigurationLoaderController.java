@@ -9,12 +9,14 @@ import org.example.pdf_creator.content.PdfCreationConfiguration;
 import org.example.pdf_creator.content.enums.MessageCode;
 
 import javafx.stage.FileChooser;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Controller for the loading panel for PdfCreationConfiguration - hello.fxml
  * Supplies methods for: creating new configuration file, loading a configuration from file,
  * and transition from 'hello.fxml' to 'config-list.fxml'
  */
+@Slf4j
 public class PDFConfigurationLoaderController {
 
     private static final String JSON_EXTENSION_EXPRESSION = "JSON files (*.json)";
@@ -22,7 +24,7 @@ public class PDFConfigurationLoaderController {
 
     public void saveConfiguration() {
         if(App.pdfCreationConfiguration == null) {
-            System.out.println("No file configuration detected. Save aborted");
+            log.error("No file configuration detected. Save aborted");
         } else {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(JSON_EXTENSION_EXPRESSION,
@@ -30,9 +32,10 @@ public class PDFConfigurationLoaderController {
             fileChooser.getExtensionFilters().add(extFilter);
             File file = fileChooser.showSaveDialog(App.stage);
             if(file != null) {
-                System.out.println(JSONReadWriteUtils.writePDFConfigurationToFile(App.pdfCreationConfiguration, file.getAbsolutePath()));
+                log.debug(JSONReadWriteUtils.writePDFConfigurationToFile(App.pdfCreationConfiguration,
+                      file.getAbsolutePath()).toString());
             } else {
-                System.out.println(MessageCode.OPERATION_ABORTED);
+                log.debug(MessageCode.OPERATION_ABORTED.toString());
             }
         }
     }
@@ -64,7 +67,7 @@ public class PDFConfigurationLoaderController {
         try {
             App.setRoot("config-list");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while opening 'config-list' view file: "+e);
         }
     }
 

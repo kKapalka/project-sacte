@@ -15,12 +15,14 @@ import com.itextpdf.layout.element.LineSeparator;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Class used to save supplied PdfCreationConfiguration as a PDF file itself.
  * Handles: display of PDF saving dialog box,
  * and creation of PDF document itself
  */
+@Slf4j
 public class PdfCreationEngine {
 
     // Offsets for created line dividers, in pixels
@@ -29,6 +31,8 @@ public class PdfCreationEngine {
     // Extension expressions for .pdf file chooser
     private static final String PDF_EXTENSION_EXPRESSION = "PDF files (*.pdf)";
     private static final String PDF_EXTENSION = "*.pdf";
+
+    private static final int MAXIMUM_NPE_ADJUSTMENT_COUNT = 8;
 
     /**
      * Method for displaying PDF export dialog window, and initializing PDF document creation
@@ -64,13 +68,23 @@ public class PdfCreationEngine {
             Document document = new Document(pdf);
             configuration.getSelectedTextSections().forEach(element -> {
                 boolean noNullPointer = false;
+                int i = 0;
                 while(!noNullPointer) {
                     try{
                         document.add(element.prepareDiv());
                         noNullPointer = true;
                     } catch (NullPointerException e) {
-                        e.printStackTrace();
-                        element.getTextSectionList().adjustForNullPointer();
+                        log.error("Error as occured while preparing div from "+element+"." +
+                                  " Performing adjustment method...");
+                        if(i > MAXIMUM_NPE_ADJUSTMENT_COUNT) {
+                            log.error("Maximum Null Pointer Adjustment method call count exceeded. Throwing runtime " +
+                                      "exception...");
+                            log.error("Faulty code: "+e);
+                            throw new RuntimeException("Null Pointer Adjustments are faulty. Forcing app shutdown...");
+                        } else {
+                            element.getTextSectionList().adjustForNullPointer();
+                            i++;
+                        }
                     }
                 }
                 if(((MainSection)element).isHasLineDivider()) {

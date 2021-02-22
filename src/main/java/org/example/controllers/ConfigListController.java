@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+import lombok.extern.slf4j.Slf4j;
+
 import org.example.App;
 import org.example.pdf_creator.FontPresetPickerDialogBox;
 import org.example.pdf_creator.content.FontPreset;
@@ -33,6 +35,7 @@ import java.util.stream.Collectors;
  * TODO section removing with confirmation
  * TODO and hiding / showing text sections with tags.
  */
+@Slf4j
 public class ConfigListController extends MainPanelController {
 
     @FXML
@@ -109,11 +112,11 @@ public class ConfigListController extends MainPanelController {
      */
     private void openSection(TextSection textSection) {
         App.currentNestOfTextSections.add(textSection);
-        System.out.println("Transition to new section: "+textSection);
+        log.debug("Transition to new section: "+textSection);
         try {
             App.setRoot("config-element");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while opening 'config-element' view file: "+e);
         }
     }
 
@@ -123,11 +126,11 @@ public class ConfigListController extends MainPanelController {
      * TextSection, this method simply flips the view to 'config-element.fxml' and initializes the view for it
      */
     public void returnToTextSectionView() {
-        System.out.println("Transition to - this - text section view");
+        log.debug("Transition to - this - text section view");
         try {
             App.setRoot("config-element");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while opening 'config-element' view file: "+e);
         }
     }
 

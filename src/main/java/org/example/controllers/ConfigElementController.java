@@ -1,7 +1,19 @@
 package org.example.controllers;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import lombok.extern.slf4j.Slf4j;
+
+import org.example.App;
+import org.example.pdf_creator.FontPresetPickerDialogBox;
+import org.example.pdf_creator.content.FontPreset;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;
 
 /**
@@ -11,10 +23,13 @@ import org.example.pdf_creator.content.abstractsclasses.TextSection;
  * modifying Title/Subtitle text in a specific TextSection,
  * and transition to Parent / Child TextSectionList
  */
+@Slf4j
 public class ConfigElementController extends MainPanelController {
 
     @FXML
     private ListView<String> fontPresetListView;
+    @FXML
+    private Button returnToSectionListButton;
 
     private TextSection currentTextSection;
 
@@ -25,12 +40,61 @@ public class ConfigElementController extends MainPanelController {
      */
     public void init(TextSection currentTextSection) {
         this.currentTextSection = currentTextSection;
-        System.out.println(currentTextSection);
-        //setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
+        setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
     }
 
+    /**
+     * Method run on transitioning to parent TextSectionList.
+     * It pops this TextSection from the currentNestOfTextSections
+     */
     private void popFromNest() {
-
+        App.currentNestOfTextSections.remove(this.currentTextSection);
     }
 
+    /**
+     * Method run on clicking 'Add new Font Preset' button.
+     * Opens a new dialog box allowing user to add new Font Preset
+     */
+    public void onNewPresetButtonClicked() {
+        new FontPresetPickerDialogBox(new FontPreset(), App.stage, (value -> {
+            List<FontPreset> fontPresets = this.currentTextSection.getFontPresetList();
+            fontPresets.add((FontPreset) value);
+            this.currentTextSection.setFontPresetList(fontPresets);
+            ObservableList<String> data1 = FXCollections.observableArrayList(fontPresets.stream().map(FontPreset::toListViewString).collect(
+                  Collectors.toList()));
+            fontPresetListView.setItems(data1);
+        })).open();
+    }
+
+    /**
+     * Transition to TextSectionList view.
+     * Since TextSection object which can transition BACK into TextSectionList is contained by aforementioned
+     * TextSectionList, this method simply flips the view to 'config-list.fxml' and initializes the view for it
+     */
+    public void returnToTextSectionListView() {
+        log.debug("Transition to - this - text section view");
+        popFromNest();
+        transitionToConfigList();
+    }
+
+    /**
+     * Method called upon "Open Text Section List" button press.
+     * Transitions to 'config-list' view, where listed TextSections are children
+     * of this TextSection
+     */
+    public void onTextSectionListOpenButtonClicked() {
+        log.debug("Opening new text section view");
+        transitionToConfigList();
+    }
+
+    /**
+     * Method handling transition to 'config-list' view
+     */
+    private void transitionToConfigList() {
+        try {
+            App.setRoot("config-list");
+        } catch (IOException e) {
+            log.error("Error while opening 'config-list' view file: "+e);
+        }
+    }
 }
