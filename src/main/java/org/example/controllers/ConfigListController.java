@@ -194,8 +194,7 @@ public class ConfigListController extends MainPanelController {
             if(click.getClickCount() == 1) {
                 highlightedTextSection =
                       textSectionList.getTextSectionList().stream()
-                                     .filter(el -> listView.getSelectionModel().getSelectedItem().
-                                           contains((textSectionList.getTextSectionList().indexOf(el)+1)+": "+el.getTitle()))
+                                     .filter(el -> ((textSectionList.getTextSectionList().indexOf(el)+1)+": "+el.getTitle()).equals(listView.getSelectionModel().getSelectedItem()))
                                      .findFirst().orElse(null);
             } else if (click.getClickCount() == 2) {
                 openSection(highlightedTextSection);

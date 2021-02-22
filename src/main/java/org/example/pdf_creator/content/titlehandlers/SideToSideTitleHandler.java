@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
 import org.example.pdf_creator.content.enums.LineDrawerEnum;
+import org.example.pdf_creator.factories.TitleHandlerType;
 
 /**
  * Title handler used for displaying title and subtitle like
@@ -36,5 +37,10 @@ public class SideToSideTitleHandler implements ITitleHandler {
         oneParagraph.setMarginRight(TITLE_HANDLER_MARGIN_SIDES);
         div.add(oneParagraph);
         return div;
+    }
+
+    @Override
+    public TitleHandlerType getTitleHandlerType() {
+        return TitleHandlerType.SIDE_TO_SIDE;
     }
 }

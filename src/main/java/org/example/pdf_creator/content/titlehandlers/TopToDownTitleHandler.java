@@ -5,6 +5,7 @@ import com.itextpdf.layout.element.Paragraph;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
+import org.example.pdf_creator.factories.TitleHandlerType;
 
 /**
  * Title handler used for displaying title and subtitle from top to down;
@@ -20,5 +21,10 @@ public class TopToDownTitleHandler implements ITitleHandler {
             div.add(subtitle);
         }
         return div;
+    }
+
+    @Override
+    public TitleHandlerType getTitleHandlerType() {
+        return TitleHandlerType.TOP_TO_DOWN;
     }
 }

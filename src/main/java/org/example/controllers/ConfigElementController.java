@@ -7,14 +7,18 @@ import org.example.App;
 import org.example.pdf_creator.FontPresetPickerDialogBox;
 import org.example.pdf_creator.content.FontPreset;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;
+import org.example.pdf_creator.factories.TextSectionListType;
+import org.example.pdf_creator.factories.TitleHandlerType;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -27,6 +31,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ConfigElementController extends MainPanelController {
 
+
+
+    @FXML
+    private Pane titleHandlerChoicePane;
+    @FXML
+    private ChoiceBox<TitleHandlerType> titleHandlerChoiceBox;
     @FXML
     private ListView<String> fontPresetListView;
     @FXML
@@ -45,11 +55,25 @@ public class ConfigElementController extends MainPanelController {
      */
     public void init(TextSection currentTextSection) {
         this.currentTextSection = currentTextSection;
+        setUpTitleHandlerChoiceBox();
         setUpFontPresetListViewWithParameters(this.fontPresetListView, this.currentTextSection);
         titleTextField.setText(currentTextSection.getTitle());
         subtitleTextField.setText(currentTextSection.getSubtitle());
     }
-
+    /**
+     * Setup method for Text Section Title Handler Choice Box
+     * Puts values inside the choice box
+     * And sets current TextSection's Title Handler to a selected type
+     */
+    private void setUpTitleHandlerChoiceBox() {
+        titleHandlerChoiceBox.getItems().addAll(TitleHandlerType.TWO_COLUMN,
+              TitleHandlerType.TOP_TO_DOWN,
+              TitleHandlerType.SIDE_TO_SIDE);
+        titleHandlerChoiceBox.setValue(currentTextSection.getTitleHandler().getTitleHandlerType());
+        titleHandlerChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> {
+            this.currentTextSection.setTitleHandler(titleHandlerChoiceBox.getItems().get(new_value.intValue()).createTitleHandler());
+        });
+    }
     /**
      * Method run on transitioning to parent TextSectionList.
      * It pops this TextSection from the currentNestOfTextSections

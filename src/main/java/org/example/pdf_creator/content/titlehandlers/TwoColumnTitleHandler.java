@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
+import org.example.pdf_creator.factories.TitleHandlerType;
 
 /**
  * TitleHandler used for representing title and subtitle
@@ -36,5 +37,10 @@ public class TwoColumnTitleHandler implements ITitleHandler {
         table.addCell(new Cell().setWidth(secondCell).add(subtitle).setBorder(Border.NO_BORDER));
         div.add(table);
         return div;
+    }
+
+    @Override
+    public TitleHandlerType getTitleHandlerType() {
+        return TitleHandlerType.TWO_COLUMN;
     }
 }

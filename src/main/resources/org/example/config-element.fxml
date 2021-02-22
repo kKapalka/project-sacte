@@ -6,8 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ChoiceBox?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ConfigElementController">
    <children>
+      <Pane fx:id="titleHandlerChoicePane" layoutX="660.0" layoutY="150.0" prefHeight="55.0" prefWidth="200.0">
+         <children>
+            <Text layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sposób obsługi tytułu i podtytułu"
+                    textAlignment="CENTER" wrappingWidth="200" />
+            <ChoiceBox fx:id="titleHandlerChoiceBox" layoutY="30.0" prefWidth="200.0" />
+         </children>
+      </Pane>
       <ListView fx:id="fontPresetListView" layoutX="660.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="newPresetButton" layoutX="660.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#onNewPresetButtonClicked" prefHeight="25.0" prefWidth="200.0" text="Dodaj nowy preset" />
       <Button fx:id="returnToSectionListButton" layoutX="100.0" layoutY="50.0" mnemonicParsing="false" onAction="#returnToTextSectionListView" prefHeight="50.0" prefWidth="115.0" text="Powróć do widoku listy sekcji" textAlignment="CENTER" wrapText="true" />

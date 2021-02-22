@@ -7,6 +7,7 @@ import com.itextpdf.layout.element.Paragraph;
 import org.example.pdf_creator.content.titlehandlers.SideToSideTitleHandler;
 import org.example.pdf_creator.content.titlehandlers.TopToDownTitleHandler;
 import org.example.pdf_creator.content.titlehandlers.TwoColumnTitleHandler;
+import org.example.pdf_creator.factories.TitleHandlerType;
 
 /**
  * Interface used for handling different display methods of TextSection title and subtitle
@@ -20,5 +21,5 @@ import org.example.pdf_creator.content.titlehandlers.TwoColumnTitleHandler;
 public interface ITitleHandler {
 
     Div handleTitleAndSubtitle(Div div, Paragraph title, Paragraph subtitle);
-
+    TitleHandlerType getTitleHandlerType();
 }
