@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.example.pdf_creator.content.abstractsclasses.ITitleHandler;
 import org.example.pdf_creator.content.abstractsclasses.TextSection;
+import org.example.pdf_creator.content.sectionorganizers.ListedTextSections;
 import com.itextpdf.layout.element.BlockElement;
 
 import lombok.AllArgsConstructor;
@@ -40,7 +41,9 @@ public class Subsection extends TextSection {
 
     public Subsection(List<FontPreset> fontPresets) {
         super(fontPresets);
-        this.setContentList(null);
+        TextSectionList textSectionList = new ListedTextSections();
+        textSectionList.fontPresetList = getChildrenFontPresets();
+        this.setTextSectionList(textSectionList);
     }
 
     @Override
@@ -59,6 +62,7 @@ public class Subsection extends TextSection {
     }
     public void setContentList(TextSectionList list) {
         this.textSectionList = list;
+
         if(this.fontPresetList != null) {
             textSectionList.conditionallySetFontPresets(getChildrenFontPresets());
         }

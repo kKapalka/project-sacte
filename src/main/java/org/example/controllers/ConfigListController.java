@@ -103,7 +103,7 @@ public class ConfigListController extends MainPanelController {
      * TODO apply fontPresets to new TextSection
      */
     public void onNewSectionButtonClicked() {
-        TextSection textSection = textSectionList.getClass().equals(PdfCreationConfiguration.class) ? new MainSection(textSectionList.getChildrenFontPresets()) : new Subsection(textSectionList.getChildrenFontPresets());
+        TextSection textSection = textSectionList.getClass().equals(PdfCreationConfiguration.class) ? new MainSection(textSectionList.fontPresetList) : new Subsection(textSectionList.fontPresetList);
         textSectionList.getTextSectionList().add(textSection);
         openSection(textSection);
     }
